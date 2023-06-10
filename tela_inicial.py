@@ -3,21 +3,24 @@ import pygame
 
 # Importando arquivos
 from config import FPS, JOGANDO, FECHAR, PRETO, ESPERA, GANHOU
-from assets import load_assets, CENARIO_INIT
+from assets import load_assets, toca_musica
+
+# Importando chaves das assets
+from assets import CENARIO_INIT, INICIO_SOM, DESLIGANDO_LUZ
 
 # Fazendo a função da tela do jogo
 def tela_inicial(tela):
+    # Carrega o dicionário assets
+    assets = load_assets()
 
     # Toca a música inicial
+    toca_musica(assets[INICIO_SOM])
 
     # Variável para o ajuste de velocidade
     relogio = pygame.time.Clock()
 
-    # Background da tela inicial
-    assets = load_assets()
-
     # ----- Loop principal
-    # pygame.mixer.music.play(loops = -1)
+    pygame.mixer.music.play(loops = -1)
     
     rodando = True
     while rodando:
@@ -29,13 +32,18 @@ def tela_inicial(tela):
 
         # Processa os eventos (mouse, teclado, botão, etc).
         for event in pygame.event.get():
-            # Verifica se foi fechado.
+            # Verifica se foi fechado
             if event.type == pygame.QUIT:
                 state = FECHAR
                 rodando = False
             
             # Verifica se uma tecla foi pressionada
             if event.type == pygame.KEYUP:
+                # Parando a música e tocando efeito sonoro
+                assets[DESLIGANDO_LUZ].play()
+                pygame.mixer.music.stop()
+
+                # Mudando estados
                 state = JOGANDO
                 rodando = False
 
