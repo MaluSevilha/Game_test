@@ -4,6 +4,7 @@ import pygame
 # Importando variáveis e funções de outros arquivos
 from config import WIDTH, HEIGHT, INICIO, FECHAR, GANHOU, JOGANDO
 from tela_inicial import tela_inicial
+from tela_vitoria import tela_vitoria
 
 # Iniciando o pygame
 pygame.init()
@@ -23,13 +24,11 @@ while state != FECHAR:
 
     # Abre a tela do jogo
     elif state == JOGANDO:
-        # state = tela_jogando(window)
-        pygame.quit() 
+        state = FECHAR
     
     # Abre a tela do jogo
     elif state == GANHOU:
-        # state = tela_vitoria(window)
-        pygame.quit() 
+        state = tela_vitoria(tela)
 
     # # Abre a tela de Game Over
     # elif state == MORTO:

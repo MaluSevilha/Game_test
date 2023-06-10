@@ -10,6 +10,9 @@ from assets import CENARIO_INIT, INICIO_SOM, DESLIGANDO_LUZ
 
 # Fazendo a função da tela do jogo
 def tela_inicial(tela):
+    # Começo da função
+    tempo_comeco = pygame.time.get_ticks()
+
     # Carrega o dicionário assets
     assets = load_assets()
 
@@ -38,7 +41,7 @@ def tela_inicial(tela):
                 rodando = False
             
             # Verifica se uma tecla foi pressionada
-            if event.type == pygame.KEYUP:
+            if event.type == pygame.KEYDOWN:
                 # Parando a música e tocando efeito sonoro
                 assets[DESLIGANDO_LUZ].play()
                 pygame.mixer.music.stop()
@@ -79,10 +82,10 @@ def tela_inicial(tela):
         
         elif state == ESPERA:
             # Quanto tempo o jogador está esperando
-            qnt_tempo = pygame.time.get_ticks()/1000
+            qnt_tempo = (pygame.time.get_ticks() - tempo_comeco)/1000
 
             # Confere se esperou 5 minutos
-            if qnt_tempo >= 300:
+            if qnt_tempo >= 10:
                 state = GANHOU
                 rodando = False
 
