@@ -3,10 +3,10 @@ import pygame
 from os import path
 
 # Importando tamanho da tela
-from config import WIDTH, HEIGHT
+from config import LARGURA, ALTURA, LARGURA_JOGADOR, ALTURA_JOGADOR
 
 # Importando caminhos
-from config import CENARIOS_DIR, SND_DIR
+from config import CENARIOS_DIR, SND_DIR, JOGADOR_DIR
 
 # Definindo chaves do dicionário assets
 # ---- Cenários
@@ -20,6 +20,13 @@ VITORIA_SOM = 'soundtrack_vitoria'
 # ---- Efeitos sonoros
 DESLIGANDO_LUZ = 'desligando luz'
 
+# ---- Jogador
+JOGADOR_DIREITA_IMG = 'jogador direita'
+JOGADOR_PULA_DIREITA_IMG = 'jogador pular direita'
+
+JOGADOR_ESQUERDA_IMG = 'jogador esquerda'
+JOGADOR_PULA_ESQUERDA_IMG = 'jogador pular esquerda'
+
 # Função que cria o dicionário assets
 def load_assets():
     
@@ -28,10 +35,22 @@ def load_assets():
 
     # Carregando imagens dentro do dicionário
     assets[CENARIO_INIT] = pygame.image.load(path.join(CENARIOS_DIR, 'cenario_ini.png')).convert()
-    assets[CENARIO_INIT] = pygame.transform.scale(assets[CENARIO_INIT], (WIDTH, HEIGHT))
+    assets[CENARIO_INIT] = pygame.transform.scale(assets[CENARIO_INIT], (LARGURA, ALTURA))
 
     assets[CENARIO_VITORIA] = pygame.image.load(path.join(CENARIOS_DIR, 'cenario_vitoria.png')).convert()
-    assets[CENARIO_VITORIA] = pygame.transform.scale(assets[CENARIO_VITORIA], (WIDTH, HEIGHT))
+    assets[CENARIO_VITORIA] = pygame.transform.scale(assets[CENARIO_VITORIA], (LARGURA, ALTURA))
+
+    assets[JOGADOR_DIREITA_IMG] = pygame.image.load(path.join(JOGADOR_DIR), 'toad_direita.png')
+    assets[JOGADOR_DIREITA_IMG] = pygame.transform.scale(assets[CENARIO_INIT], (LARGURA_JOGADOR, ALTURA_JOGADOR))
+
+    assets[JOGADOR_PULA_DIREITA_IMG] = pygame.image.load(path.join(JOGADOR_DIR), 'toad_pula_direita.png')
+    assets[JOGADOR_PULA_DIREITA_IMG] = pygame.transform.scale(assets[CENARIO_INIT], (LARGURA_JOGADOR, ALTURA_JOGADOR))
+
+    assets[JOGADOR_ESQUERDA_IMG] = pygame.image.load(path.join(JOGADOR_DIR), 'toad_esquerda.png')
+    assets[JOGADOR_ESQUERDA_IMG] = pygame.transform.scale(assets[CENARIO_INIT], (LARGURA_JOGADOR, ALTURA_JOGADOR))
+
+    assets[JOGADOR_PULA_ESQUERDA_IMG] = pygame.image.load(path.join(JOGADOR_DIR), 'toad_pula_esquerda.png')
+    assets[JOGADOR_PULA_ESQUERDA_IMG] = pygame.transform.scale(assets[CENARIO_INIT], (LARGURA_JOGADOR, ALTURA_JOGADOR))
 
     # Carregando efeitos sonoros dentro do dicionário
     assets[DESLIGANDO_LUZ] = pygame.mixer.Sound(path.join(SND_DIR, 'desligando_luz.mp3'))
