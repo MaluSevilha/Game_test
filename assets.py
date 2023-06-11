@@ -12,6 +12,8 @@ from config import CENARIOS_DIR, SND_DIR, JOGADOR_DIR
 # ---- Cenários
 CENARIO_INIT = 'cenario inicio'
 CENARIO_VITORIA = 'cenario vitoria'
+CENARIO_INSTRUCAO = 'cenario instrução'
+CENARIO_BASE = 'cenario base'
 
 # ---- Sons
 INICIO_SOM = 'soundtrack inicial'
@@ -39,6 +41,12 @@ def load_assets():
 
     assets[CENARIO_VITORIA] = pygame.image.load(path.join(CENARIOS_DIR, 'cenario_vitoria.png')).convert()
     assets[CENARIO_VITORIA] = pygame.transform.scale(assets[CENARIO_VITORIA], (LARGURA, ALTURA))
+
+    assets[CENARIO_BASE] = pygame.image.load(path.join(CENARIOS_DIR, 'cenario_principal.png')).convert()
+    assets[CENARIO_BASE] = pygame.transform.scale(assets[CENARIO_VITORIA], (LARGURA, ALTURA))
+
+    assets[CENARIO_INSTRUCAO] = pygame.image.load(path.join(CENARIOS_DIR, 'cenario_instrucao.png')).convert()
+    assets[CENARIO_INSTRUCAO] = pygame.transform.scale(assets[CENARIO_VITORIA], (LARGURA, ALTURA))
 
     assets[JOGADOR_DIREITA_IMG] = pygame.image.load(path.join(JOGADOR_DIR), 'toad_direita.png')
     assets[JOGADOR_DIREITA_IMG] = pygame.transform.scale(assets[CENARIO_INIT], (LARGURA_JOGADOR, ALTURA_JOGADOR))
