@@ -2,7 +2,7 @@
 import pygame
 
 # Importando arquivos
-from config import FPS, JOGANDO, FECHAR, PRETO, ESPERA, GANHOU
+from config import FPS, FECHAR, PRETO, ESPERA, GANHOU, INSTRUCAO
 from assets import load_assets, toca_musica
 
 # Importando chaves das assets
@@ -22,7 +22,7 @@ def tela_inicial(tela):
     # Variável para o ajuste de velocidade
     relogio = pygame.time.Clock()
 
-    # ----- Loop principal
+    # ===== Loop principal =====
     pygame.mixer.music.play(loops = -1)
     
     rodando = True
@@ -47,7 +47,7 @@ def tela_inicial(tela):
                 pygame.mixer.music.stop()
 
                 # Mudando estados
-                state = JOGANDO
+                state = INSTRUCAO
                 rodando = False
 
         # A cada loop, redesenha o fundo e os sprites

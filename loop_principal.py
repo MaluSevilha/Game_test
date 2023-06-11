@@ -2,16 +2,17 @@
 import pygame
 
 # Importando variáveis e funções de outros arquivos
-from config import WIDTH, HEIGHT, INICIO, FECHAR, GANHOU, JOGANDO
+from config import LARGURA, ALTURA, INICIO, FECHAR, GANHOU, SALA_MOBS, INSTRUCAO, SALA_BOSS
 from tela_inicial import tela_inicial
 from tela_vitoria import tela_vitoria
+from tela_instrucao import tela_instrucao
 
 # Iniciando o pygame
 pygame.init()
 pygame.mixer.init()
 
 # ----- Gera tela principal
-tela = pygame.display.set_mode((WIDTH, HEIGHT))
+tela = pygame.display.set_mode((ALTURA, LARGURA))
 pygame.display.set_caption('Não apague a luz')
 
 
@@ -21,12 +22,20 @@ while state != FECHAR:
     # Começa a tela de início
     if state == INICIO:
         state = tela_inicial(tela)
+    
+    # Abre a sala de instrução
+    elif state == INSTRUCAO:
+        steta = tela_instrucao(tela)
 
-    # Abre a tela do jogo
-    elif state == JOGANDO:
+    # Abre a sala dos mobs
+    elif state == SALA_MOBS:
         state = FECHAR
     
-    # Abre a tela do jogo
+    # Abre a sala do boss
+    elif state == SALA_BOSS:
+        state = FECHAR
+    
+    # Abre a tela de vitória
     elif state == GANHOU:
         state = tela_vitoria(tela)
 

@@ -15,6 +15,11 @@ ALTURA_JOGADOR = 30     # Altura do jogador
 TILES = 25              # Tamanho de um tile [25x25]
 FPS = 60                # Frames por segundo
 
+# Velocidades para o jogo
+VEL_CORRER = 10
+VEL_PULO = - 15
+GRAVIDADE = 10
+
 # Criando mapas para tiles [24x20]
 MAPA_MOBS = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -71,9 +76,20 @@ AZUL = (0, 0, 255)
 AMARELO = (255, 255, 0)
 
 # Estados para controle do fluxo da aplicação
+# ---- Estados para encerramento do jogo
 MORTO = -1
-INICIO = 0
 FECHAR = 1
-JOGANDO = 2
+
+# ---- Estados para a abertura das salas
+SALA_BOSS = 2
+SALA_MOBS = 6
+INSTRUCAO = 5
+INICIO = 0
+
+# ---- Estado para definir o que o usuário está fazendo no início
 ESPERA = 3
 GANHOU = 4
+
+# ---- Estados para acompanhar o jogador
+NO_CHAO = 7
+PULANDO = 8 
