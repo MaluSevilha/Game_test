@@ -41,7 +41,7 @@ def tela_inicial(tela):
                 rodando = False
             
             # Verifica se uma tecla foi pressionada
-            if event.type == pygame.KEYDOWN:
+            if event.type == pygame.MOUSEBUTTONDOWN:
                 # Parando a música e tocando efeito sonoro
                 assets[DESLIGANDO_LUZ].play()
                 pygame.mixer.music.stop()
@@ -85,7 +85,7 @@ def tela_inicial(tela):
             qnt_tempo = (pygame.time.get_ticks() - tempo_comeco)/1000
 
             # Confere se esperou 5 minutos
-            if qnt_tempo >= 10:
+            if qnt_tempo >= 300:
                 state = GANHOU
                 rodando = False
 

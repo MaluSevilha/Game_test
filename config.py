@@ -4,10 +4,12 @@ from os import path
 # Estabelece o caminho que contem as figuras, sons e fontes
 CENARIOS_DIR = path.join(path.dirname(__file__), 'assets', 'imagens', 'cenarios')
 SND_DIR = path.join(path.dirname(__file__), 'assets', 'sons')
+TILES_DIR = path.join(path.dirname(__file__), 'assets', 'tiles')
 
 # Dados gerais do jogo.
 WIDTH = 600     # Largura da tela
 HEIGHT = 500    # Altura da tela
+TILES = 10      # Tamanho de um tile [10x10]
 FPS = 60        # Frames por segundo
 
 # Cores básicas

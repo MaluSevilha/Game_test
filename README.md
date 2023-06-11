@@ -5,6 +5,7 @@ Projeto para o Insper Coding
 #### Imagens:
 - Cenário inicial: https://br.pinterest.com/argosoz/pixel-horror/
 - Cenário Vtória: https://www.artstation.com/artwork/3RJGJ 
+- Jogador: https://www.spriters-resource.com/fullview/197952/ 
 
 #### Músicas:
 - Soundtrack do Início: https://www.fesliyanstudios.com/royalty-free-music/download/dark-fog/265 
