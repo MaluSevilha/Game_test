@@ -62,7 +62,7 @@ def load_assets():
     assets[CENARIO_INSTRUCAO] = pygame.transform.scale(assets[CENARIO_INSTRUCAO], (LARGURA, ALTURA))
 
     # ---- Plataforma Instrução
-    assets[PLATAFORMA_BASE] = pygame.image.load(path.join(CENARIOS_DIR, 'plataforma_teste.png')).convert_alpha()
+    assets[PLATAFORMA_BASE] = pygame.image.load(path.join(PLATAFORMA_DIR, 'plataforma_teste.png')).convert_alpha()
     assets[PLATAFORMA_BASE] = pygame.transform.scale(assets[PLATAFORMA_BASE], (6*TILE, TILE))
 
     # ---- Tiles

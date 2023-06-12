@@ -2,8 +2,8 @@
 import pygame
 
 # Importando arquivos
-from config import FECHAR, INSTRUCAO, FPS, VEL_CORRER, PRETO, PULANDO
-from sprites import jogador
+from config import FECHAR, INSTRUCAO, FPS, VEL_CORRER, PRETO, PULANDO, GRAVIDADE, NA_PLATAFORMA
+from sprites import Jogador, Plataforma
 from assets import load_assets, toca_musica, CENARIO_INSTRUCAO
 
 # Importando imagens do jogador
@@ -24,18 +24,21 @@ def tela_instrucao(tela):
 
     # Criando grupos
     all_sprites = pygame.sprite.Group()
-    all_tiles = pygame.sprite.Group()
-    all_vidas = pygame.sprite.Group()
+    all_plataformas = pygame.sprite.Group()
 
     # Adicionando ao dicionário groups
     groups = {}
     groups['all_sprites'] = all_sprites
-    groups['all_vidas'] = all_vidas
-    groups['all_tiles'] = all_tiles
+    groups['all_tiles'] = all_plataformas
 
     # Criando o jogador
-    player = jogador(groups, assets)
+    player = Jogador(groups, assets)
     all_sprites.add(player)
+
+    # Criando plataforma
+    plataforma = Plataforma(groups, assets)
+    all_sprites.add(plataforma)
+    all_plataformas.add(plataforma)
 
     # Variáveis necessárias para o jogo
     keys_down = {}
@@ -96,9 +99,39 @@ def tela_instrucao(tela):
                             player.speedx -= VEL_CORRER
                         if event.key == pygame.K_a:
                             player.speedx += VEL_CORRER
+
+        # Se colidir com a plataforma    
+        colisoes = pygame.sprite.spritecollide(player, all_plataformas, False)
+
+        # Para cada colisão
+        for colisao in colisoes:
+            # Se o player colidir de baixo para cima
+            if player.rect.bottom > plataforma.rect.bottom:
+                player.rect.top = plataforma.rect.bottom
+                player.speedy += GRAVIDADE
+
+                # Atualizando imagem do jogador
+                if player.orientacao == 'direita':
+                    player.image = assets[JOGADOR_DIREITA_IMG]
+                
+                else:
+                    player.image = assets[JOGADOR_ESQUERDA_IMG]
+
+            
+            # Se o player colidir de cim para baixo
+            else:
+                player.rect.bottom = plataforma.rect.top
+                player.speedy = 0
+                player.state = NA_PLATAFORMA
+
+        if player.state == NA_PLATAFORMA:
+            if player.rect.right < plataforma.rect.left or player.rect.left > plataforma.rect.right:
+                player.state = PULANDO
+                player.speedy += GRAVIDADE
+
         # ----- Atualiza estado do jogo
-        # Atualizando a posição dos sprites
-        all_sprites.update(state)
+        # Atualizando a posição do jogador
+        player.update(state)
 
         # ----- Gera saídas
         tela.fill(PRETO)                                # Preenche com a cor preta

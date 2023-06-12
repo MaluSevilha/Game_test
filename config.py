@@ -94,3 +94,4 @@ GANHOU = 4
 # ---- Estados para acompanhar o jogador
 NO_CHAO = 7
 PULANDO = 8 
+NA_PLATAFORMA = 9
