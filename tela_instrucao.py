@@ -124,7 +124,7 @@ def tela_instrucao(tela):
                     player.image = assets[JOGADOR_ESQUERDA_IMG]
 
         if player.state == NA_PLATAFORMA:
-            if player.rect.right < plataforma.rect.left or player.rect.left > plataforma.rect.right:
+            if player.rect.right <= plataforma.rect.left or player.rect.left >= plataforma.rect.right:
                 player.state = PULANDO
                 player.speedy += GRAVIDADE
         
