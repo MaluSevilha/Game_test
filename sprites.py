@@ -1,26 +1,27 @@
 import pygame
-from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG, PLATAFORMA_BASE
-from config import INSTRUCAO, ALTURA, LARGURA, VEL_PULO, NO_CHAO, PULANDO, GRAVIDADE
+from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG, PLATAFORMA_BASE, BALA_IMG
+from config import INSTRUCAO, ALTURA, LARGURA, VEL_PULO, NO_CHAO, PULANDO, GRAVIDADE, ALTURA_JOGADOR
 
 class Bala(pygame.sprite.Sprite):
     # Construtor da classe
-    def __init__(self, assets, bottom, centerx, player):
+    def __init__(self, assets, centery, centerx, player):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
-
+        
+        # Imagem da bala
         self.image = assets[BALA_IMG]
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         
         # Coloca no lugar inicial definido em x, y do constutor
         self.rect.centerx = centerx
-        self.rect.bottom = bottom
+        self.rect.bottom = centery
 
         # Para velocidade da bala
         if player.orientacao == 'direita':
-            self.speedx = - 10 
+            self.speedx = 10 
         else:
-            self.speedx = 10
+            self.speedx = - 10
 
     def update(self):
         # A bala só se move no eixo y
@@ -49,7 +50,7 @@ class Jogador(pygame.sprite.Sprite):
         # Cria variáveis do jogador e grupos
         # ----- Atirar
         self.ultimo_tiro = pygame.time.get_ticks()
-        self.tempo_tiro = 500
+        self.tempo_tiro = 300
 
         # ----- Velocidade
         self.speedy = 0
@@ -125,7 +126,7 @@ class Jogador(pygame.sprite.Sprite):
             self.ultimo_tiro = agora
 
             # A nova bala vai ser criada logo acima e no centro horizontal da nave
-            novo_tiro = Bala(self.assets, self.rect.top, self.rect.centerx, self)
+            novo_tiro = Bala(self.assets, self.rect.centery, self.rect.centerx, self)
             self.groups['all_sprites'].add(novo_tiro)
             self.groups['all_tiros'].add(novo_tiro)
             # self.assets[TIRO_SND].play()

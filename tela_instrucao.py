@@ -25,11 +25,13 @@ def tela_instrucao(tela):
     # Criando grupos
     all_sprites = pygame.sprite.Group()
     all_plataformas = pygame.sprite.Group()
+    all_tiros = pygame.sprite.Group()
 
     # Adicionando ao dicionário groups
     groups = {}
     groups['all_sprites'] = all_sprites
     groups['all_tiles'] = all_plataformas
+    groups['all_tiros'] = all_tiros
 
     # Criando o jogador
     player = Jogador(groups, assets)
@@ -88,6 +90,12 @@ def tela_instrucao(tela):
                             player.image = assets[JOGADOR_PULA_ESQUERDA_IMG]
                         else:
                             player.image = assets[JOGADOR_ESQUERDA_IMG]
+                
+                # Se clicou com o mouse
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    # Se clicou com o botão esquerdo
+                    if event.button == 1:
+                        player.atirar()
 
                     
                 # Verifica se soltou alguma tecla.
@@ -134,6 +142,7 @@ def tela_instrucao(tela):
         # ----- Atualiza estado do jogo
         # Atualizando a posição do jogador
         player.update(state)
+        all_tiros.update()
 
         # ----- Gera saídas
         tela.fill(PRETO)                                # Preenche com a cor preta

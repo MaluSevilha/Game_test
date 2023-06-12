@@ -27,6 +27,9 @@ ACIDO = 'acido'
 # ---- Plataforma para instruções
 PLATAFORMA_BASE = 'plataforma instruções'
 
+# ---- Bala
+BALA_IMG = 'imagem bala'
+
 # ---- Sons
 INICIO_SOM = 'soundtrack inicial'
 VITORIA_SOM = 'soundtrack_vitoria'
@@ -64,6 +67,10 @@ def load_assets():
     # ---- Plataforma Instrução
     assets[PLATAFORMA_BASE] = pygame.image.load(path.join(PLATAFORMA_DIR, 'plataforma_teste.png')).convert_alpha()
     assets[PLATAFORMA_BASE] = pygame.transform.scale(assets[PLATAFORMA_BASE], (5*TILE, TILE))
+
+    # ---- Bala
+    assets[BALA_IMG] = pygame.image.load(path.join(PLATAFORMA_DIR, 'bala.png')).convert_alpha()
+    assets[BALA_IMG] = pygame.transform.scale(assets[BALA_IMG], (15, 7.5))
 
     # ---- Tiles
     assets[BASE] = pygame.image.load(path.join(TILES_DIR, 'chao_basico.png')).convert_alpha()
