@@ -6,13 +6,14 @@ CENARIOS_DIR = path.join(path.dirname(__file__), 'assets', 'imagens', 'cenarios'
 SND_DIR = path.join(path.dirname(__file__), 'assets', 'sons')
 TILES_DIR = path.join(path.dirname(__file__), 'assets', 'imagens', 'tiles')
 JOGADOR_DIR = path.join(path.dirname(__file__), 'assets', 'imagens', 'jogador')
+PLATAFORMA_DIR = path.join(path.dirname(__file__), 'assets', 'imagens')
 
 # Dados gerais do jogo.
 LARGURA = 600*1.5           # Largura da tela
 ALTURA = 500*1.5            # Altura da tela
 LARGURA_JOGADOR = 25*1.5    # Largura do jogador
 ALTURA_JOGADOR = 30*1.5     # Altura do jogador
-TILES = 25*1.5              # Tamanho de um tile [25x25]
+TILE = 25*1.5              # Tamanho de um tile [25x25]
 FPS = 60                    # Frames por segundo
 
 # Velocidades para o jogo
