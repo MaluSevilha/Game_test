@@ -104,11 +104,17 @@ def tela_instrucao(tela):
         colisoes = pygame.sprite.spritecollide(player, all_plataformas, False)
 
         # Para cada colisão
-        for colisao in colisoes:
+        if len(colisoes) > 0:
             # Se o player colidir de baixo para cima
             if player.rect.bottom > plataforma.rect.bottom:
                 player.rect.top = plataforma.rect.bottom
                 player.speedy += GRAVIDADE
+            
+            # Se o player colidir de cima para baixo
+            else:
+                player.rect.bottom = plataforma.rect.top
+                player.speedy = 0
+                player.state = NA_PLATAFORMA
 
                 # Atualizando imagem do jogador
                 if player.orientacao == 'direita':
@@ -116,13 +122,6 @@ def tela_instrucao(tela):
                 
                 else:
                     player.image = assets[JOGADOR_ESQUERDA_IMG]
-
-            
-            # Se o player colidir de cim para baixo
-            else:
-                player.rect.bottom = plataforma.rect.top
-                player.speedy = 0
-                player.state = NA_PLATAFORMA
 
         if player.state == NA_PLATAFORMA:
             if player.rect.right < plataforma.rect.left or player.rect.left > plataforma.rect.right:

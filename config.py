@@ -9,12 +9,12 @@ JOGADOR_DIR = path.join(path.dirname(__file__), 'assets', 'imagens', 'jogador')
 PLATAFORMA_DIR = path.join(path.dirname(__file__), 'assets', 'imagens')
 
 # Dados gerais do jogo.
-LARGURA = 600*1.5           # Largura da tela
-ALTURA = 500*1.5            # Altura da tela
-LARGURA_JOGADOR = 25*1.5    # Largura do jogador
-ALTURA_JOGADOR = 30*1.5     # Altura do jogador
-TILE = 25*1.5              # Tamanho de um tile [25x25]
-FPS = 60                    # Frames por segundo
+LARGURA = 900            # Largura da tela
+ALTURA = 750             # Altura da tela
+LARGURA_JOGADOR = 37.5   # Largura do jogador
+ALTURA_JOGADOR = 45      # Altura do jogador
+TILE = 37.5              # Tamanho de um tile [37,5 x 37,5]
+FPS = 60                 # Frames por segundo
 
 # Velocidades para o jogo
 VEL_CORRER = 5
