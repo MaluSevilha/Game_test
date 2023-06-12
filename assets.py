@@ -43,22 +43,22 @@ def load_assets():
     assets[CENARIO_VITORIA] = pygame.transform.scale(assets[CENARIO_VITORIA], (LARGURA, ALTURA))
 
     assets[CENARIO_BASE] = pygame.image.load(path.join(CENARIOS_DIR, 'cenario_principal.png')).convert()
-    assets[CENARIO_BASE] = pygame.transform.scale(assets[CENARIO_VITORIA], (LARGURA, ALTURA))
+    assets[CENARIO_BASE] = pygame.transform.scale(assets[CENARIO_BASE], (LARGURA, ALTURA))
 
     assets[CENARIO_INSTRUCAO] = pygame.image.load(path.join(CENARIOS_DIR, 'cenario_instrucao.png')).convert()
-    assets[CENARIO_INSTRUCAO] = pygame.transform.scale(assets[CENARIO_VITORIA], (LARGURA, ALTURA))
+    assets[CENARIO_INSTRUCAO] = pygame.transform.scale(assets[CENARIO_INSTRUCAO], (LARGURA, ALTURA))
 
-    assets[JOGADOR_DIREITA_IMG] = pygame.image.load(path.join(JOGADOR_DIR), 'toad_direita.png')
-    assets[JOGADOR_DIREITA_IMG] = pygame.transform.scale(assets[CENARIO_INIT], (LARGURA_JOGADOR, ALTURA_JOGADOR))
+    assets[JOGADOR_DIREITA_IMG] = pygame.image.load(path.join(JOGADOR_DIR, 'toad_direita.png')).convert_alpha()
+    assets[JOGADOR_DIREITA_IMG] = pygame.transform.scale(assets[JOGADOR_DIREITA_IMG], (LARGURA_JOGADOR, ALTURA_JOGADOR))
 
-    assets[JOGADOR_PULA_DIREITA_IMG] = pygame.image.load(path.join(JOGADOR_DIR), 'toad_pula_direita.png')
-    assets[JOGADOR_PULA_DIREITA_IMG] = pygame.transform.scale(assets[CENARIO_INIT], (LARGURA_JOGADOR, ALTURA_JOGADOR))
+    assets[JOGADOR_PULA_DIREITA_IMG] = pygame.image.load(path.join(JOGADOR_DIR, 'toad_pula_direita.png')).convert_alpha()
+    assets[JOGADOR_PULA_DIREITA_IMG] = pygame.transform.scale(assets[JOGADOR_PULA_DIREITA_IMG], (LARGURA_JOGADOR, ALTURA_JOGADOR))
 
-    assets[JOGADOR_ESQUERDA_IMG] = pygame.image.load(path.join(JOGADOR_DIR), 'toad_esquerda.png')
-    assets[JOGADOR_ESQUERDA_IMG] = pygame.transform.scale(assets[CENARIO_INIT], (LARGURA_JOGADOR, ALTURA_JOGADOR))
+    assets[JOGADOR_ESQUERDA_IMG] = pygame.image.load(path.join(JOGADOR_DIR, 'toad_esquerda.png')).convert_alpha()
+    assets[JOGADOR_ESQUERDA_IMG] = pygame.transform.scale(assets[JOGADOR_ESQUERDA_IMG], (LARGURA_JOGADOR, ALTURA_JOGADOR))
 
-    assets[JOGADOR_PULA_ESQUERDA_IMG] = pygame.image.load(path.join(JOGADOR_DIR), 'toad_pula_esquerda.png')
-    assets[JOGADOR_PULA_ESQUERDA_IMG] = pygame.transform.scale(assets[CENARIO_INIT], (LARGURA_JOGADOR, ALTURA_JOGADOR))
+    assets[JOGADOR_PULA_ESQUERDA_IMG] = pygame.image.load(path.join(JOGADOR_DIR, 'toad_pula_esquerda.png')).convert_alpha()
+    assets[JOGADOR_PULA_ESQUERDA_IMG] = pygame.transform.scale(assets[JOGADOR_PULA_ESQUERDA_IMG], (LARGURA_JOGADOR, ALTURA_JOGADOR))
 
     # Carregando efeitos sonoros dentro do dicionário
     assets[DESLIGANDO_LUZ] = pygame.mixer.Sound(path.join(SND_DIR, 'desligando_luz.mp3'))

@@ -4,20 +4,20 @@ from os import path
 # Estabelece o caminho que contem as figuras, sons e fontes
 CENARIOS_DIR = path.join(path.dirname(__file__), 'assets', 'imagens', 'cenarios')
 SND_DIR = path.join(path.dirname(__file__), 'assets', 'sons')
-TILES_DIR = path.join(path.dirname(__file__), 'assets', 'images', 'tiles')
+TILES_DIR = path.join(path.dirname(__file__), 'assets', 'imagens', 'tiles')
 JOGADOR_DIR = path.join(path.dirname(__file__), 'assets', 'imagens', 'jogador')
 
 # Dados gerais do jogo.
-LARGURA = 600           # Largura da tela
-ALTURA = 500            # Altura da tela
-LARGURA_JOGADOR = 25    # Largura do jogador
-ALTURA_JOGADOR = 30     # Altura do jogador
-TILES = 25              # Tamanho de um tile [25x25]
-FPS = 60                # Frames por segundo
+LARGURA = 600*1.5           # Largura da tela
+ALTURA = 500*1.5            # Altura da tela
+LARGURA_JOGADOR = 25*1.5    # Largura do jogador
+ALTURA_JOGADOR = 30*1.5     # Altura do jogador
+TILES = 25*1.5              # Tamanho de um tile [25x25]
+FPS = 60                    # Frames por segundo
 
 # Velocidades para o jogo
-VEL_CORRER = 10
-VEL_PULO = - 15
+VEL_CORRER = 5
+VEL_PULO = 30
 GRAVIDADE = 10
 
 # Criando mapas para tiles [24x20]

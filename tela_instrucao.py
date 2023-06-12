@@ -71,13 +71,12 @@ def tela_instrucao(tela):
                     # Dependendo da tecla, altera a velocidade do anzol e da linha.
                     if event.key in keys_down and keys_down[event.key]:
                         if event.key == pygame.K_d:
-                            player.speedy -= VEL_CORRER
+                            player.speedx -= VEL_CORRER
                         if event.key == pygame.K_a:
                             player.speedx += VEL_CORRER
-
         # ----- Atualiza estado do jogo
         # Atualizando a posição dos sprites
-        all_sprites.update()
+        all_sprites.update(state)
 
         # ----- Gera saídas
         tela.fill(PRETO)                                # Preenche com a cor preta

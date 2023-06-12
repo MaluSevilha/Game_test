@@ -12,7 +12,7 @@ pygame.init()
 pygame.mixer.init()
 
 # ----- Gera tela principal
-tela = pygame.display.set_mode((ALTURA, LARGURA))
+tela = pygame.display.set_mode((LARGURA, ALTURA))
 pygame.display.set_caption('Não apague a luz')
 
 
@@ -25,7 +25,7 @@ while state != FECHAR:
     
     # Abre a sala de instrução
     elif state == INSTRUCAO:
-        steta = tela_instrucao(tela)
+        state = tela_instrucao(tela)
 
     # Abre a sala dos mobs
     elif state == SALA_MOBS:

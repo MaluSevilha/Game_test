@@ -58,15 +58,15 @@ def tela_inicial(tela):
         pygame.display.flip()
         
         # Confere se é para mudar de tela
-        if state == JOGANDO:
+        if state == INSTRUCAO:
             # Define que deve haver uma pausa
             pausa = True
 
+            # Determinando instante inicial
+            tempo_inicial = pygame.time.get_ticks()
+
             # Cria um loop para rodar segunda tela de início
             while pausa:
-                # Tempo inicial
-                tempo_inicial = pygame.time.get_ticks()
-
                 # Tempo de espera
                 sec = (pygame.time.get_ticks() - tempo_inicial)/1000
 
