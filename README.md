@@ -17,8 +17,9 @@ Projeto para o Insper Coding
 #### Efeitos Sonoros:
 - Desligando a luz: https://www.fesliyanstudios.com/royalty-free-sound-effects-download/light-switch-24 
 
-#### Tile Map [como fazer]:
+#### Tile Map:
 - https://github.com/Rkzzin/Fox-Wox-Pygame 
+- https://opengameart.org/content/a-platformer-in-the-forest 
 
 # Agradecimentos
-Agradeço à equipe de DesSoft, sobretudo ao professor Fillipe Resina, do primeiro semestre do Insper pela ajuda com a biblioteca pygame. Também agradeço pela ajuda do Henrique Santos para a contrução do mapa com tile map. 
+Agradeço à equipe de DesSoft, sobretudo ao professor Fillipe Resina, do primeiro semestre do Insper pela ajuda com a biblioteca pygame. Também agradeço pela ajuda do Henrique Santos para a construção do mapa com tile map. 

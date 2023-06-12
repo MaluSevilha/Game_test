@@ -2,11 +2,11 @@
 import pygame
 from os import path
 
-# Importando tamanho da tela
-from config import LARGURA, ALTURA, LARGURA_JOGADOR, ALTURA_JOGADOR
+# Importando tamanho da tela e de compoentes
+from config import LARGURA, ALTURA, LARGURA_JOGADOR, ALTURA_JOGADOR, TILE
 
 # Importando caminhos
-from config import CENARIOS_DIR, SND_DIR, JOGADOR_DIR
+from config import CENARIOS_DIR, SND_DIR, JOGADOR_DIR, TILES_DIR
 
 # Definindo chaves do dicionário assets
 # ---- Cenários
@@ -14,6 +14,15 @@ CENARIO_INIT = 'cenario inicio'
 CENARIO_VITORIA = 'cenario vitoria'
 CENARIO_INSTRUCAO = 'cenario instrução'
 CENARIO_BASE = 'cenario base'
+
+# ---- Tiles
+BASE = 'grama base'
+DIR = 'grama direita'
+QUINA_DIR = 'quina direita'
+ESQ = 'grama esquerda'
+QUINA_ESQ = 'quina esquerda'
+ND = 'vazio'
+ACIDO = 'acido'
 
 # ---- Sons
 INICIO_SOM = 'soundtrack inicial'
@@ -36,6 +45,7 @@ def load_assets():
     assets = {}
 
     # Carregando imagens dentro do dicionário
+    # ---- Cenários
     assets[CENARIO_INIT] = pygame.image.load(path.join(CENARIOS_DIR, 'cenario_ini.png')).convert()
     assets[CENARIO_INIT] = pygame.transform.scale(assets[CENARIO_INIT], (LARGURA, ALTURA))
 
@@ -48,6 +58,27 @@ def load_assets():
     assets[CENARIO_INSTRUCAO] = pygame.image.load(path.join(CENARIOS_DIR, 'cenario_instrucao.png')).convert()
     assets[CENARIO_INSTRUCAO] = pygame.transform.scale(assets[CENARIO_INSTRUCAO], (LARGURA, ALTURA))
 
+    # ---- Tiles
+    assets[BASE] = pygame.image.load(path.join(TILES_DIR, 'chao_basico.png')).convert()
+    assets[BASE] = pygame.transform.scale(assets[BASE], (TILE, TILE))
+
+    assets[DIR] = pygame.image.load(path.join(TILES_DIR, 'chao_dir_max.png')).convert()
+    assets[DIR] = pygame.transform.scale(assets[DIR], (TILE, TILE))
+    assets[QUINA_DIR] = pygame.image.load(path.join(TILES_DIR, 'chao_dir_quina.png')).convert()
+    assets[QUINA_DIR] = pygame.transform.scale(assets[QUINA_DIR], (TILE, TILE))
+
+    assets[ESQ] = pygame.image.load(path.join(TILES_DIR, 'chao_esq_max.png')).convert()
+    assets[ESQ] = pygame.transform.scale(assets[ESQ], (TILE, TILE))
+    assets[QUINA_ESQ] = pygame.image.load(path.join(TILES_DIR, 'chao_esq_quina.png')).convert()
+    assets[QUINA_ESQ] = pygame.transform.scale(assets[QUINA_ESQ], (TILE, TILE))
+
+    assets[ACIDO] = pygame.image.load(path.join(TILES_DIR, 'acido.png')).convert()
+    assets[ACIDO] = pygame.transform.scale(assets[ACIDO], (TILE, TILE))
+
+    assets[ND] = pygame.image.load(path.join(TILES_DIR, 'vazio.png')).convert()
+    assets[ND] = pygame.transform.scale(assets[ND], (TILE, TILE))
+
+    # ---- Jogador
     assets[JOGADOR_DIREITA_IMG] = pygame.image.load(path.join(JOGADOR_DIR, 'toad_direita.png')).convert_alpha()
     assets[JOGADOR_DIREITA_IMG] = pygame.transform.scale(assets[JOGADOR_DIREITA_IMG], (LARGURA_JOGADOR, ALTURA_JOGADOR))
 
