@@ -2,7 +2,7 @@
 import pygame
 
 # Importando arquivos
-from config import FECHAR, INSTRUCAO, FPS, VEL_CORRER, PRETO, PULANDO, GRAVIDADE, NA_PLATAFORMA
+from config import FECHAR, INSTRUCAO, SALA_MOBS, FPS, VEL_CORRER, PRETO, PULANDO, GRAVIDADE, NA_PLATAFORMA
 from sprites import Jogador, Plataforma
 from assets import load_assets, toca_musica, CENARIO_INSTRUCAO
 
@@ -47,7 +47,7 @@ def tela_instrucao(tela):
     state = INSTRUCAO
 
     # ===== Loop Principal =====
-    while state != FECHAR:
+    while state != FECHAR and state != SALA_MOBS:
         clock.tick(FPS)
 
         # ----- Trata eventos
@@ -127,6 +127,9 @@ def tela_instrucao(tela):
             if player.rect.right < plataforma.rect.left or player.rect.left > plataforma.rect.right:
                 player.state = PULANDO
                 player.speedy += GRAVIDADE
+        
+        if player.rect.right >= 875:
+            state = SALA_MOBS
 
         # ----- Atualiza estado do jogo
         # Atualizando a posição do jogador

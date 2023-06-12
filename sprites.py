@@ -93,7 +93,7 @@ class Plataforma(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
         # Posiciona o jogador
-        self.rect.centerx = 300
+        self.rect.centerx = 500
         self.rect.bottom = 3*ALTURA / 4
 
         # ----- Grupos
