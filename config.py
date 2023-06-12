@@ -17,8 +17,8 @@ FPS = 60                    # Frames por segundo
 
 # Velocidades para o jogo
 VEL_CORRER = 5
-VEL_PULO = 30
-GRAVIDADE = 10
+VEL_PULO = 20
+GRAVIDADE = 1
 
 # Criando mapas para tiles [24x20]
 MAPA_MOBS = [

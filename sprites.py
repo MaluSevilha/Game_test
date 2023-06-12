@@ -16,7 +16,7 @@ class jogador(pygame.sprite.Sprite):
 
         # Posiciona o jogador
         self.rect.centerx = 100
-        self.rect.bottom = 450
+        self.rect.bottom = ALTURA - 59
 
         # Cria variáveis do jogador e grupos
         self.speedy = 0
@@ -26,10 +26,16 @@ class jogador(pygame.sprite.Sprite):
         self.assets = assets
     
     def update(self, state):
-        # Atualização da posição da vara
+        # Atualização da posição do jogador
+        # ----- No eixo y
+        if self.state != NO_CHAO:
+            self.speedy += GRAVIDADE
+        else:
+            self.speedy = 0
         self.rect.y += self.speedy
+
+        # ----- No eixo x
         self.rect.x += self.speedx
-        self.speedy += GRAVIDADE
 
         # Mantem dentro da tela
         # ----- No eixo X
@@ -39,13 +45,16 @@ class jogador(pygame.sprite.Sprite):
             self.rect.right = LARGURA
         
         # ---- No eixo y
+        # Caso esteja na tela de instruções
         if state == INSTRUCAO:
             if self.rect.bottom > ALTURA - 59:
                 self.rect.bottom = ALTURA - 59
+                self.state = NO_CHAO
             if self.rect.top < 0:
                 self.rect.top = 0
 
     def pular(self):
+        # Só pode pular quando estiver em contato com o chão
         if self.state == NO_CHAO:
             self.speedy -= VEL_PULO
             self.state = PULANDO
