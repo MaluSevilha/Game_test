@@ -2,6 +2,34 @@ import pygame
 from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG, PLATAFORMA_BASE
 from config import INSTRUCAO, ALTURA, LARGURA, VEL_PULO, NO_CHAO, PULANDO, GRAVIDADE
 
+class Bala(pygame.sprite.Sprite):
+    # Construtor da classe
+    def __init__(self, assets, bottom, centerx, player):
+        # Construtor da classe mãe (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+
+        self.image = assets[BALA_IMG]
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+        
+        # Coloca no lugar inicial definido em x, y do constutor
+        self.rect.centerx = centerx
+        self.rect.bottom = bottom
+
+        # Para velocidade da bala
+        if player.orientacao == 'direita':
+            self.speedx = - 10 
+        else:
+            self.speedx = 10
+
+    def update(self):
+        # A bala só se move no eixo y
+        self.rect.x += self.speedx
+
+        # Se o tiro passar do inicio da tela, morre.
+        if self.rect.left < 0 or self.rect.right > LARGURA:
+            self.kill()
+
 class Jogador(pygame.sprite.Sprite):
     def __init__(self, groups, assets):
         # Construtor da classe mãe (Sprite).
@@ -19,6 +47,10 @@ class Jogador(pygame.sprite.Sprite):
         self.rect.bottom = ALTURA - 59
 
         # Cria variáveis do jogador e grupos
+        # ----- Atirar
+        self.ultimo_tiro = pygame.time.get_ticks()
+        self.tempo_tiro = 500
+
         # ----- Velocidade
         self.speedy = 0
         self.speedx = 0
@@ -79,6 +111,24 @@ class Jogador(pygame.sprite.Sprite):
                 self.image = self.assets[JOGADOR_PULA_ESQUERDA_IMG]
             self.speedy -= VEL_PULO
             self.state = PULANDO
+    
+    def atirar(self):
+        # Verifica se pode atirar
+        agora = pygame.time.get_ticks()
+
+        # Verifica quantos ticks se passaram desde o último tiro.
+        tempo_passado = agora - self.ultimo_tiro
+
+        # Se já pode atirar novamente...
+        if tempo_passado > self.tempo_tiro:
+            # Marca o tick da nova imagem.
+            self.ultimo_tiro = agora
+
+            # A nova bala vai ser criada logo acima e no centro horizontal da nave
+            novo_tiro = Bala(self.assets, self.rect.top, self.rect.centerx, self)
+            self.groups['all_sprites'].add(novo_tiro)
+            self.groups['all_tiros'].add(novo_tiro)
+            # self.assets[TIRO_SND].play()
 
 class Plataforma(pygame.sprite.Sprite):
     def __init__(self, groups, assets):
