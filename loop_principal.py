@@ -6,6 +6,7 @@ from config import LARGURA, ALTURA, INICIO, FECHAR, GANHOU, SALA_MOBS, INSTRUCAO
 from tela_inicial import tela_inicial
 from tela_vitoria import tela_vitoria
 from tela_instrucao import tela_instrucao
+from tela_mobs import tela_mobs
 
 # Iniciando o pygame
 pygame.init()
@@ -29,7 +30,7 @@ while state != FECHAR:
 
     # Abre a sala dos mobs
     elif state == SALA_MOBS:
-        state = FECHAR
+        state = tela_mobs(tela)
     
     # Abre a sala do boss
     elif state == SALA_BOSS:

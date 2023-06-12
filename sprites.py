@@ -1,6 +1,6 @@
 import pygame
 from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG, PLATAFORMA_BASE, BALA_IMG
-from config import INSTRUCAO, ALTURA, LARGURA, VEL_PULO, NO_CHAO, PULANDO, GRAVIDADE, ALTURA_JOGADOR
+from config import INSTRUCAO, ALTURA, LARGURA, VEL_PULO, NO_CHAO, PULANDO, GRAVIDADE, ALTURA_JOGADOR, TILE
 
 class Bala(pygame.sprite.Sprite):
     # Construtor da classe
@@ -150,3 +150,21 @@ class Plataforma(pygame.sprite.Sprite):
         # ----- Grupos
         self.groups = groups
         self.assets = assets
+
+class Tile(pygame.sprite.Sprite):
+    def __init__(self, tile_img, row, column):
+        # Construtor da classe pai
+        pygame.sprite.Sprite.__init__(self)
+
+        # Aumenta o tamanho do tile
+        tile_img = pygame.transform.scale(tile_img, (TILE, TILE))
+
+        # Define a imagem do tile
+        self.image = tile_img
+
+        # Define o rect do tile
+        self.rect = self.image.get_rect()
+
+        # Posiciona o tile com base na linha e coluna passada no "MAP"
+        self.rect.x = TILE * column
+        self.rect.y = TILE * row
