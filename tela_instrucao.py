@@ -2,9 +2,12 @@
 import pygame
 
 # Importando arquivos
-from config import FECHAR, INSTRUCAO, FPS, VEL_CORRER, PRETO
+from config import FECHAR, INSTRUCAO, FPS, VEL_CORRER, PRETO, PULANDO
 from sprites import jogador
 from assets import load_assets, toca_musica, CENARIO_INSTRUCAO
+
+# Importando imagens do jogador
+from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG
 
 # Importando chaves das assets
 from assets import CENARIO_INIT, INICIO_SOM, DESLIGANDO_LUZ
@@ -61,9 +64,28 @@ def tela_instrucao(tela):
                     if event.key == pygame.K_w:
                         player.pular()
                     if event.key == pygame.K_d:
+                        # ----- Orientação
+                        player.orientacao = 'direita'
+
+                        # Atualizado velocidade
                         player.speedx += VEL_CORRER
+
+                        # Se o player estiver pulando ou não
+                        if player.state == PULANDO:
+                            player.image = assets[JOGADOR_PULA_DIREITA_IMG]
+                        else:
+                            player.image = assets[JOGADOR_DIREITA_IMG]
                     if event.key == pygame.K_a:
+                        # ----- Orientação
+                        player.orientacao = 'esquerda'
+
+                        # Se o player estiver pulando ou não
                         player.speedx -= VEL_CORRER
+                        if player.state == PULANDO:
+                            player.image = assets[JOGADOR_PULA_ESQUERDA_IMG]
+                        else:
+                            player.image = assets[JOGADOR_ESQUERDA_IMG]
+
                     
                 # Verifica se soltou alguma tecla.
                 if event.type == pygame.KEYUP:

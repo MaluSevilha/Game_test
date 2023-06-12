@@ -1,5 +1,5 @@
 import pygame
-from assets import JOGADOR_DIREITA_IMG
+from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG
 from config import INSTRUCAO, ALTURA, LARGURA, VEL_PULO, NO_CHAO, PULANDO, GRAVIDADE
 
 class jogador(pygame.sprite.Sprite):
@@ -19,8 +19,14 @@ class jogador(pygame.sprite.Sprite):
         self.rect.bottom = ALTURA - 59
 
         # Cria variáveis do jogador e grupos
+        # ----- Velocidade
         self.speedy = 0
         self.speedx = 0
+
+        # ----- Orientações
+        self.orientacao = 'direita'
+
+        # ----- Estado e grupos
         self.state = NO_CHAO
         self.groups = groups
         self.assets = assets
@@ -47,14 +53,29 @@ class jogador(pygame.sprite.Sprite):
         # ---- No eixo y
         # Caso esteja na tela de instruções
         if state == INSTRUCAO:
+            # Embaixo
             if self.rect.bottom > ALTURA - 59:
+                # Definindo imagem com base na orientação
+                if self.orientacao == 'direita':
+                    self.image = self.assets[JOGADOR_DIREITA_IMG]
+                else:
+                    self.image = self.assets[JOGADOR_ESQUERDA_IMG]
+
+                # Redefinindo posição
                 self.rect.bottom = ALTURA - 59
+
+                # Mudando o estado
                 self.state = NO_CHAO
+            # Em cima
             if self.rect.top < 0:
                 self.rect.top = 0
 
     def pular(self):
         # Só pode pular quando estiver em contato com o chão
         if self.state == NO_CHAO:
+            if self.orientacao == 'direita':
+                self.image = self.assets[JOGADOR_PULA_DIREITA_IMG]
+            else:
+                self.image = self.assets[JOGADOR_PULA_ESQUERDA_IMG]
             self.speedy -= VEL_PULO
             self.state = PULANDO
