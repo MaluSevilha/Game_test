@@ -14,6 +14,8 @@ CENARIO_INIT = 'cenario inicio'
 CENARIO_VITORIA = 'cenario vitoria'
 CENARIO_INSTRUCAO = 'cenario instrução'
 CENARIO_BASE = 'cenario base'
+CENARIO_GAMEOVER = 'cenario gameover'
+JUMPSCARE = 'jumpscare'
 
 # ---- Tiles
 BASE = 'grama base'
@@ -67,6 +69,12 @@ def load_assets():
 
     assets[CENARIO_INSTRUCAO] = pygame.image.load(path.join(CENARIOS_DIR, 'cenario_instrucao.png')).convert()
     assets[CENARIO_INSTRUCAO] = pygame.transform.scale(assets[CENARIO_INSTRUCAO], (LARGURA, ALTURA))
+
+    assets[CENARIO_GAMEOVER] = pygame.image.load(path.join(CENARIOS_DIR, 'cenario_gameover.png')).convert()
+    assets[CENARIO_GAMEOVER] = pygame.transform.scale(assets[CENARIO_GAMEOVER], (LARGURA, ALTURA))
+
+    assets[JUMPSCARE] = pygame.image.load(path.join(CENARIOS_DIR, 'cenario_gameover.png')).convert()
+    assets[JUMPSCARE] = pygame.transform.scale(assets[JUMPSCARE], (LARGURA, ALTURA))
 
     # ---- Plataforma Instrução
     assets[PLATAFORMA_BASE] = pygame.image.load(path.join(PLATAFORMA_DIR, 'plataforma_teste.png')).convert_alpha()
