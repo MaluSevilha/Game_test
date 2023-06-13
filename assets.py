@@ -17,12 +17,16 @@ CENARIO_BASE = 'cenario base'
 
 # ---- Tiles
 BASE = 'grama base'
+BASE_FUNDA = 'base funda'
 DIR = 'grama direita'
 QUINA_DIR = 'quina direita'
+LADO_DIR = 'lado direita'
 ESQ = 'grama esquerda'
 QUINA_ESQ = 'quina esquerda'
+LADO_ESQ = 'lado esquerda'
 ND = 'vazio'
 ACIDO = 'acido'
+ACIDO_FUNDO = 'acido fundo'
 
 # ---- Plataforma para instruções
 PLATAFORMA_BASE = 'plataforma instruções'
@@ -75,19 +79,27 @@ def load_assets():
     # ---- Tiles
     assets[BASE] = pygame.image.load(path.join(TILES_DIR, 'chao_basico.png')).convert_alpha()
     assets[BASE] = pygame.transform.scale(assets[BASE], (TILE, TILE))
+    assets[BASE_FUNDA] = pygame.image.load(path.join(TILES_DIR, 'chao_profundo.png')).convert_alpha()
+    assets[BASE_FUNDA] = pygame.transform.scale(assets[BASE_FUNDA], (TILE, TILE))
 
     assets[DIR] = pygame.image.load(path.join(TILES_DIR, 'chao_dir_max.png')).convert_alpha()
     assets[DIR] = pygame.transform.scale(assets[DIR], (TILE, TILE))
     assets[QUINA_DIR] = pygame.image.load(path.join(TILES_DIR, 'chao_dir_quina.png')).convert_alpha()
     assets[QUINA_DIR] = pygame.transform.scale(assets[QUINA_DIR], (TILE, TILE))
+    assets[LADO_DIR] = pygame.image.load(path.join(TILES_DIR, 'direita_borda.png')).convert_alpha()
+    assets[LADO_DIR] = pygame.transform.scale(assets[LADO_DIR], (TILE, TILE))
 
     assets[ESQ] = pygame.image.load(path.join(TILES_DIR, 'chao_esq_max.png')).convert_alpha()
     assets[ESQ] = pygame.transform.scale(assets[ESQ], (TILE, TILE))
     assets[QUINA_ESQ] = pygame.image.load(path.join(TILES_DIR, 'chao_esq_quina.png')).convert_alpha()
     assets[QUINA_ESQ] = pygame.transform.scale(assets[QUINA_ESQ], (TILE, TILE))
+    assets[LADO_ESQ] = pygame.image.load(path.join(TILES_DIR, 'esquerda_borda.png')).convert_alpha()
+    assets[LADO_ESQ] = pygame.transform.scale(assets[LADO_ESQ], (TILE, TILE))
 
     assets[ACIDO] = pygame.image.load(path.join(TILES_DIR, 'acido.png')).convert_alpha()
     assets[ACIDO] = pygame.transform.scale(assets[ACIDO], (TILE, TILE))
+    assets[ACIDO_FUNDO] = pygame.image.load(path.join(TILES_DIR, 'acido_profundo.png')).convert_alpha()
+    assets[ACIDO_FUNDO] = pygame.transform.scale(assets[ACIDO_FUNDO], (TILE, TILE))
 
     assets[ND] = pygame.image.load(path.join(TILES_DIR, 'vazio.png')).convert_alpha()
     assets[ND] = pygame.transform.scale(assets[ND], (TILE, TILE))

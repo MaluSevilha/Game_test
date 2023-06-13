@@ -1,13 +1,16 @@
 import pygame
 
 # Importando estados
-from config import FECHAR, NO_CHAO, PULANDO, SALA_MOBS, MAPA_MOBS, FPS, PRETO, VEL_CORRER, GRAVIDADE, ALTURA, NA_PLATAFORMA
+from config import FECHAR, PULANDO, SALA_MOBS, SALA_BOSS, NA_PLATAFORMA
+
+# Importando variáveis relevantes
+from config import ALTURA, VEL_CORRER, MAPA_MOBS, FPS, PRETO
 
 # Importando classes
 from sprites import Jogador, Tile
 
 # Importando chaves de assets
-from assets import load_assets, ACIDO, CENARIO_BASE, ND
+from assets import load_assets, ACIDO, ACIDO_FUNDO, CENARIO_BASE, ND
 
 # Importando imagens dos jogadores
 from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG
@@ -48,7 +51,7 @@ def tela_mobs(tela):
             tile = Tile(assets[tipo_tile], linha, coluna)
             all_tiles.add(tile)
 
-            if tipo_tile == ACIDO:
+            if tipo_tile == ACIDO or tipo_tile == ACIDO_FUNDO:
                 all_acido.add(tile)
             elif tipo_tile != ND:
                 all_blocos.add(tile)
@@ -58,7 +61,7 @@ def tela_mobs(tela):
     vidas = 3
     state = SALA_MOBS
 
-    while state != FECHAR:
+    while state != FECHAR and state != SALA_BOSS:
         clock.tick(FPS)
 
         # ----- Trata eventos
@@ -158,7 +161,7 @@ def tela_mobs(tela):
                 player.state = PULANDO
 
         if player.rect.right >= 875:
-            state = SALA_MOBS
+            state = SALA_BOSS
     
         # ----- Atualiza estado do jogo
         player.update(state)
