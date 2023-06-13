@@ -17,7 +17,7 @@ tela = pygame.display.set_mode((LARGURA, ALTURA))
 pygame.display.set_caption('Não apague a luz')
 
 
-# ----- Loop Principal
+# ===== Loop Principal =====
 state = INICIO
 while state != FECHAR:
     # Começa a tela de início

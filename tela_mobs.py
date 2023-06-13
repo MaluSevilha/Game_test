@@ -1,7 +1,7 @@
 import pygame
 
 # Importando estados
-from config import FECHAR, PULANDO, SALA_MOBS, SALA_BOSS, NA_PLATAFORMA
+from config import FECHAR, PULANDO, SALA_MOBS, SALA_BOSS, NA_PLATAFORMA, MORTO
 
 # Importando variáveis relevantes
 from config import ALTURA, VEL_CORRER, MAPA_MOBS, FPS, PRETO
@@ -41,7 +41,7 @@ def tela_mobs(tela):
     groups['all_tiros'] = all_tiros
 
     # Criando o jogador
-    player = Jogador(groups, assets, 100, ALTURA - 50)
+    player = Jogador(groups, assets, 20, ALTURA - 50)
     all_sprites.add(player)
 
     # Criando tiles
@@ -59,9 +59,10 @@ def tela_mobs(tela):
     # Variáveis necessárias para o jogo
     keys_down = {}
     vidas = 3
+    player_vivo = True
     state = SALA_MOBS
 
-    while state != FECHAR and state != SALA_BOSS:
+    while state != FECHAR and state != SALA_BOSS and state != MORTO:
         clock.tick(FPS)
 
         # ----- Trata eventos
@@ -99,8 +100,10 @@ def tela_mobs(tela):
                         # ----- Orientação
                         player.orientacao = 'esquerda'
 
-                        # Se o player estiver pulando ou não
+                        # Atualizado a velocidade
                         player.speedx -= VEL_CORRER
+
+                        # Se o player estiver pulando ou não
                         if player.state == PULANDO:
                             player.image = assets[JOGADOR_PULA_ESQUERDA_IMG]
                         else:
@@ -116,6 +119,10 @@ def tela_mobs(tela):
                 # Verifica se soltou alguma tecla.
                 if event.type == pygame.KEYUP:
 
+                    # Se a tecla não estiver no dicionário
+                    if event.key not in keys_down:
+                        keys_down[event.key] = False
+                    
                     # Dependendo da tecla, altera a velocidade do anzol e da linha.
                     if event.key in keys_down and keys_down[event.key]:
                         if event.key == pygame.K_d:
@@ -124,12 +131,12 @@ def tela_mobs(tela):
                             player.speedx += VEL_CORRER
 
         # Se colidir com a plataforma    
-        colisoes = pygame.sprite.spritecollide(player, all_blocos, False)
+        colisoes_tiles = pygame.sprite.spritecollide(player, all_blocos, False)
 
         # Para cada colisão
-        if len(colisoes) > 0:
+        if len(colisoes_tiles) > 0:
             # Definindo uma colisão
-            colisao = colisoes[0]
+            colisao = colisoes_tiles[0]
 
             # Definindo limites dos blocos
             esquerda_bloco = colisao.rect.left
@@ -154,12 +161,47 @@ def tela_mobs(tela):
                     player.image = assets[JOGADOR_ESQUERDA_IMG]
             
             # Impedindo que o player entre em um loop de colisões
-            colisoes = []
+            colisoes_tiles = []
+        
+        # Conferindo se colidiu no ácido
+        colisao_acido = pygame.sprite.spritecollide(player, all_acido, False)
 
+        # Tirando uma vida caso esteja em contato com ácido 
+        if len(colisao_acido) > 0:
+            # Perdendo uma vida
+            vidas -= 1
+
+            # Matando o jogador
+            player.kill()
+
+            # Recriando o jogador
+            if vidas > 0:
+                player_vivo = False
+            
+            # Impedindo que tire mais de uma vez 
+            colisao_acido = []
+
+        # Se o jogador está sem vidas
+        if vidas < 0:
+            state = MORTO
+        # Se o jogador possui vidas
+        else:
+            # Recriando o jogador, caso esse tenha morrido
+            if player_vivo == False:
+                # Recriando o jogador
+                player = Jogador(groups, assets, 20, ALTURA - 50)
+                all_sprites.add(player)
+                player_vivo = True
+
+                # Dando reestart nas teclas apertadas
+                keys_down = {}
+        
+        # Conferindo se o jogador saiu da plataforma
         if player.state == NA_PLATAFORMA:
             if player.rect.right <= esquerda_bloco or player.rect.left >= direita_bloco:
                 player.state = PULANDO
 
+        # Se o jogador aravessou a sala
         if player.rect.right >= 875:
             state = SALA_BOSS
     
