@@ -2,7 +2,7 @@
 import pygame
 
 # Importando arquivos
-from config import FECHAR, INSTRUCAO, SALA_MOBS, FPS, VEL_CORRER, PRETO, PULANDO, GRAVIDADE, NA_PLATAFORMA
+from config import FECHAR, INSTRUCAO, SALA_MOBS, FPS, VEL_CORRER, PRETO, PULANDO, GRAVIDADE, NA_PLATAFORMA, ALTURA
 from sprites import Jogador, Plataforma
 from assets import load_assets, toca_musica, CENARIO_INSTRUCAO
 
@@ -34,7 +34,7 @@ def tela_instrucao(tela):
     groups['all_tiros'] = all_tiros
 
     # Criando o jogador
-    player = Jogador(groups, assets)
+    player = Jogador(groups, assets, 100, ALTURA - 59)
     all_sprites.add(player)
 
     # Criando plataforma

@@ -1,8 +1,16 @@
 import pygame
 
-from config import FECHAR, MORTO, SALA_MOBS, MAPA_MOBS, FPS, PRETO
+# Importando estados
+from config import FECHAR, NO_CHAO, PULANDO, SALA_MOBS, MAPA_MOBS, FPS, PRETO, VEL_CORRER, GRAVIDADE, ALTURA, NA_PLATAFORMA
+
+# Importando classes
 from sprites import Jogador, Tile
-from assets import load_assets, ACIDO, CENARIO_BASE
+
+# Importando chaves de assets
+from assets import load_assets, ACIDO, CENARIO_BASE, ND
+
+# Importando imagens dos jogadores
+from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG
 
 # Importando chaves de assets
 
@@ -30,8 +38,8 @@ def tela_mobs(tela):
     groups['all_tiros'] = all_tiros
 
     # Criando o jogador
-    # player = Jogador(groups, assets)
-    # all_sprites.add(player)
+    player = Jogador(groups, assets, 100, ALTURA - 50)
+    all_sprites.add(player)
 
     # Criando tiles
     for linha in range (len(MAPA_MOBS)):
@@ -42,7 +50,7 @@ def tela_mobs(tela):
 
             if tipo_tile == ACIDO:
                 all_acido.add(tile)
-            else:
+            elif tipo_tile != ND:
                 all_blocos.add(tile)
 
     # Variáveis necessárias para o jogo
@@ -59,9 +67,105 @@ def tela_mobs(tela):
             # ----- Verifica se fechou o jogo
             if event.type == pygame.QUIT:
                 state = FECHAR
+            
+             # Só verifica o teclado se está no estado de jogo
+            if state == SALA_MOBS:
+
+                # Verifica se apertou alguma tecla.
+                if event.type == pygame.KEYDOWN:
+
+                    # Dependendo da tecla, altera a velocidade do anzol e da linha.
+                    keys_down[event.key] = True
+                    if event.key == pygame.K_w:
+                        player.pular()
+                    if event.key == pygame.K_d:
+                        # ----- Orientação
+                        player.orientacao = 'direita'
+
+                        # Atualizado velocidade
+                        player.speedx += VEL_CORRER
+
+                        # Se o player estiver pulando ou não
+                        if player.state == PULANDO:
+                            player.image = assets[JOGADOR_PULA_DIREITA_IMG]
+                        else:
+                            player.image = assets[JOGADOR_DIREITA_IMG]
+                    if event.key == pygame.K_a:
+                        # ----- Orientação
+                        player.orientacao = 'esquerda'
+
+                        # Se o player estiver pulando ou não
+                        player.speedx -= VEL_CORRER
+                        if player.state == PULANDO:
+                            player.image = assets[JOGADOR_PULA_ESQUERDA_IMG]
+                        else:
+                            player.image = assets[JOGADOR_ESQUERDA_IMG]
+                
+                # Se clicou com o mouse
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    # Se clicou com o botão esquerdo
+                    if event.button == 1:
+                        player.atirar()
+
+                    
+                # Verifica se soltou alguma tecla.
+                if event.type == pygame.KEYUP:
+
+                    # Dependendo da tecla, altera a velocidade do anzol e da linha.
+                    if event.key in keys_down and keys_down[event.key]:
+                        if event.key == pygame.K_d:
+                            player.speedx -= VEL_CORRER
+                        if event.key == pygame.K_a:
+                            player.speedx += VEL_CORRER
+
+        # Se colidir com a plataforma    
+        colisoes = pygame.sprite.spritecollide(player, all_blocos, False)
+
+        # Para cada colisão
+        if len(colisoes) > 0:
+            # Definindo uma colisão
+            colisao = colisoes[0]
+
+            # Definindo limites dos blocos
+            esquerda_bloco = colisao.rect.left
+            direita_bloco = colisao.rect.right
+
+            # Se o player colidir de baixo para cima
+            if player.rect.bottom > colisao.rect.bottom:
+                player.rect.top = colisao.rect.bottom
+                player.speedy = 0
+            
+            # Se o player colidir de cima para baixo
+            else:
+                player.rect.bottom = colisao.rect.top
+                player.speedy = 0
+                player.state = NA_PLATAFORMA
+
+                # Atualizando imagem do jogador
+                if player.orientacao == 'direita':
+                    player.image = assets[JOGADOR_DIREITA_IMG]
+                
+                else:
+                    player.image = assets[JOGADOR_ESQUERDA_IMG]
+            
+            # Impedindo que o player entre em um loop de colisões
+            colisoes = []
+
+        if player.state == NA_PLATAFORMA:
+            if player.rect.right <= esquerda_bloco or player.rect.left >= direita_bloco:
+                player.state = PULANDO
+        
+        if player.rect.right >= 875:
+            state = SALA_MOBS
+
+        # ----- Atualiza estado do jogo
+        # Atualizando a posição do jogador
+        player.update(state)
+        all_tiros.update()
     
     # ----- Atualiza estado do jogo
-        all_sprites.update()
+        player.update(state)
+        all_tiros.update()
 
         # ----- Gera saídas
         tela.fill(PRETO)

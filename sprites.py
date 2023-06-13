@@ -32,7 +32,7 @@ class Bala(pygame.sprite.Sprite):
             self.kill()
 
 class Jogador(pygame.sprite.Sprite):
-    def __init__(self, groups, assets):
+    def __init__(self, groups, assets, posx, posy):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
         
@@ -44,8 +44,8 @@ class Jogador(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
         # Posiciona o jogador
-        self.rect.centerx = 100
-        self.rect.bottom = ALTURA - 59
+        self.rect.centerx = posx
+        self.rect.bottom = posy
 
         # Cria variáveis do jogador e grupos
         # ----- Atirar
@@ -102,6 +102,24 @@ class Jogador(pygame.sprite.Sprite):
             # Em cima
             if self.rect.top < 0:
                 self.rect.top = 0
+        
+        else:
+            # Em cima
+            if self.rect.top < 0:
+                self.rect.top = 0
+            # Embaixo
+            if self.rect.bottom > ALTURA:
+                # Definindo imagem com base na orientação
+                if self.orientacao == 'direita':
+                    self.image = self.assets[JOGADOR_DIREITA_IMG]
+                else:
+                    self.image = self.assets[JOGADOR_ESQUERDA_IMG]
+
+                # Redefinindo posição
+                self.rect.bottom = ALTURA
+
+                # Mudando o estado
+                self.state = NO_CHAO
 
     def pular(self):
         # Só pode pular quando estiver em contato com o chão
