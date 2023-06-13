@@ -74,10 +74,11 @@ def tela_mobs(tela):
                 # Verifica se apertou alguma tecla.
                 if event.type == pygame.KEYDOWN:
 
-                    # Dependendo da tecla, altera a velocidade do anzol e da linha.
+                    # Dependendo da tecla, altera a velocidade do player
                     keys_down[event.key] = True
                     if event.key == pygame.K_w:
                         player.pular()
+                    
                     if event.key == pygame.K_d:
                         # ----- Orientação
                         player.orientacao = 'direita'
@@ -90,6 +91,7 @@ def tela_mobs(tela):
                             player.image = assets[JOGADOR_PULA_DIREITA_IMG]
                         else:
                             player.image = assets[JOGADOR_DIREITA_IMG]
+                    
                     if event.key == pygame.K_a:
                         # ----- Orientação
                         player.orientacao = 'esquerda'
@@ -136,7 +138,7 @@ def tela_mobs(tela):
                 player.speedy = 0
             
             # Se o player colidir de cima para baixo
-            else:
+            elif player.rect.top < colisao.rect.top:
                 player.rect.bottom = colisao.rect.top
                 player.speedy = 0
                 player.state = NA_PLATAFORMA
@@ -154,16 +156,11 @@ def tela_mobs(tela):
         if player.state == NA_PLATAFORMA:
             if player.rect.right <= esquerda_bloco or player.rect.left >= direita_bloco:
                 player.state = PULANDO
-        
+
         if player.rect.right >= 875:
             state = SALA_MOBS
-
-        # ----- Atualiza estado do jogo
-        # Atualizando a posição do jogador
-        player.update(state)
-        all_tiros.update()
     
-    # ----- Atualiza estado do jogo
+        # ----- Atualiza estado do jogo
         player.update(state)
         all_tiros.update()
 

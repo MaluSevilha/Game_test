@@ -107,19 +107,6 @@ class Jogador(pygame.sprite.Sprite):
             # Em cima
             if self.rect.top < 0:
                 self.rect.top = 0
-            # Embaixo
-            if self.rect.bottom > ALTURA:
-                # Definindo imagem com base na orientação
-                if self.orientacao == 'direita':
-                    self.image = self.assets[JOGADOR_DIREITA_IMG]
-                else:
-                    self.image = self.assets[JOGADOR_ESQUERDA_IMG]
-
-                # Redefinindo posição
-                self.rect.bottom = ALTURA
-
-                # Mudando o estado
-                self.state = NO_CHAO
 
     def pular(self):
         # Só pode pular quando estiver em contato com o chão

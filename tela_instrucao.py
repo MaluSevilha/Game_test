@@ -44,8 +44,6 @@ def tela_instrucao(tela):
 
     # Variáveis necessárias para o jogo
     keys_down = {}
-    score = 0
-    vidas = 3
     state = INSTRUCAO
 
     # ===== Loop Principal =====
