@@ -10,7 +10,7 @@ from config import ALTURA, VEL_CORRER, MAPA_MOBS, FPS, PRETO
 from sprites import Jogador, Tile
 
 # Importando chaves de assets
-from assets import load_assets, ACIDO, ACIDO_FUNDO, CENARIO_BASE, ND
+from assets import load_assets, ACIDO, ACIDO_FUNDO, CENARIO_BASE, ND, MORTE_SOM
 
 # Importando imagens dos jogadores
 from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG
@@ -173,6 +173,9 @@ def tela_mobs(tela):
 
             # Matando o jogador
             player.kill()
+
+            # Tocando som de morte
+            assets[MORTE_SOM].play()
 
             # Recriando o jogador
             if vidas > 0:

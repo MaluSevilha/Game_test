@@ -46,6 +46,7 @@ DESLIGANDO_LUZ = 'desligando luz'
 JUMPSCARE_SOM = 'jumpscare snd'
 PULO_SOM = 'pulo som'
 TIRO_SOM = 'tiro som'
+MORTE_SOM = 'morte som'
 
 # ---- Jogador
 JOGADOR_DIREITA_IMG = 'jogador direita'
@@ -132,6 +133,7 @@ def load_assets():
     # Carregando efeitos sonoros dentro do dicionário
     assets[DESLIGANDO_LUZ] = pygame.mixer.Sound(path.join(SND_DIR, 'desligando_luz.mp3'))
     assets[JUMPSCARE_SOM] = pygame.mixer.Sound(path.join(SND_DIR, 'jumpscare.mp3'))
+    assets[MORTE_SOM] = pygame.mixer.Sound(path.join(SND_DIR, 'morte.mp3'))
 
     assets[PULO_SOM] = pygame.mixer.Sound(path.join(SND_DIR, 'pulo.mp3'))
     assets[PULO_SOM].set_volume(0.2)

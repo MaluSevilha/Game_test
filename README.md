@@ -20,9 +20,10 @@ Projeto para o Insper Coding
 #### Efeitos Sonoros:
 - Desligando a luz: https://www.fesliyanstudios.com/royalty-free-sound-effects-download/light-switch-24 
 - Jumpscare: https://www.fesliyanstudios.com/royalty-free-music/download/jump-scare-l/2393 
-- Morte: 
 - Tiro: https://pixabay.com/sound-effects/shoot02wav-14562/ 
 - Pulo: https://pixabay.com/sound-effects/cartoon-jump-6462/ 
+- Morte: https://quicksounds.com/sound/102/mario-death          
+[créditos para Super Mario Bros]
 
 #### Tile Map:
 - https://github.com/Rkzzin/Fox-Wox-Pygame 
