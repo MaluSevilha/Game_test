@@ -3,10 +3,10 @@ import pygame
 from os import path
 
 # Importando tamanho da tela e de compoentes
-from config import LARGURA, ALTURA, LARGURA_JOGADOR, ALTURA_JOGADOR, TILE
+from config import LARGURA, ALTURA, LARGURA_JOGADOR, ALTURA_JOGADOR, TILE, ALTURA_INIMIGO, LARGURA_INIMIGO
 
 # Importando caminhos
-from config import CENARIOS_DIR, SND_DIR, JOGADOR_DIR, TILES_DIR, PLATAFORMA_DIR
+from config import CENARIOS_DIR, SND_DIR, JOGADOR_DIR, TILES_DIR, PLATAFORMA_DIR, INIMIGO_DIR
 
 # Definindo chaves do dicionário assets
 # ---- Cenários
@@ -54,6 +54,10 @@ JOGADOR_PULA_DIREITA_IMG = 'jogador pular direita'
 
 JOGADOR_ESQUERDA_IMG = 'jogador esquerda'
 JOGADOR_PULA_ESQUERDA_IMG = 'jogador pular esquerda'
+
+# ---- Inimigo
+INIMIGO_IMG = 'inimigo img'
+TIRO_INIMIGO_IMG = 'tiro inimigo'
 
 # Função que cria o dicionário assets
 def load_assets():
@@ -129,6 +133,17 @@ def load_assets():
 
     assets[JOGADOR_PULA_ESQUERDA_IMG] = pygame.image.load(path.join(JOGADOR_DIR, 'toad_pula_esquerda.png')).convert_alpha()
     assets[JOGADOR_PULA_ESQUERDA_IMG] = pygame.transform.scale(assets[JOGADOR_PULA_ESQUERDA_IMG], (LARGURA_JOGADOR, ALTURA_JOGADOR))
+
+    # ---- Inimigo
+    assets[TIRO_INIMIGO_IMG] = pygame.image.load(path.join(INIMIGO_DIR, 'tiro_inimigo.png')).convert_alpha()
+    assets[TIRO_INIMIGO_IMG] = pygame.transform.scale(assets[TIRO_INIMIGO_IMG], (30, 15))
+
+    assets[INIMIGO_IMG] = []
+    for i in range(5):
+        arquivo = 'inimigo_' + str(i) + '.png'
+        imagem = pygame.image.load(path.join(INIMIGO_DIR, arquivo)).convert_alpha()
+        imagem = pygame.transform.scale(imagem, (LARGURA_INIMIGO, ALTURA_INIMIGO))
+        assets[INIMIGO_IMG].append(imagem)
 
     # Carregando efeitos sonoros dentro do dicionário
     assets[DESLIGANDO_LUZ] = pygame.mixer.Sound(path.join(SND_DIR, 'desligando_luz.mp3'))
