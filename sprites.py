@@ -1,5 +1,5 @@
 import pygame
-from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, PULO_SOM, TIRO_SOM
+from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, PULO_SOM, TIRO_SOM, INIMIGO_IMG, TIRO_INIMIGO_IMG
 from assets import JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG, PLATAFORMA_BASE, BALA_IMG
 from config import INSTRUCAO, ALTURA, LARGURA, VEL_PULO, NO_CHAO, PULANDO, GRAVIDADE, ALTURA_JOGADOR, TILE
 
@@ -183,6 +183,31 @@ class Tile(pygame.sprite.Sprite):
         self.rect.x = TILE * column
         self.rect.y = TILE * row
 
+class Bala_Inimigo(pygame.sprite.Sprite):
+    # Construtor da classe
+    def __init__(self, assets, centery, centerx):
+        # Construtor da classe mãe (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        # Imagem da bala
+        self.image = assets[TIRO_INIMIGO_IMG]
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+        
+        # Coloca no lugar inicial definido em x, y do constutor
+        self.rect.centerx = centerx
+        self.rect.bottom = centery
+        
+        # Determinando a velocidade do tiro
+        self.speedx = - 10
+
+    def update(self):
+        # A bala só se move no eixo y
+        self.rect.x += self.speedx
+
+        # Se o tiro passar do inicio da tela, morre.
+        if self.rect.left < 0 or self.rect.right > LARGURA:
+            self.kill()
 
 class Inimigo(pygame.sprite.Sprite):
     def __init__(self, groups, assets, posx, posy):

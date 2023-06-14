@@ -24,6 +24,8 @@ Projeto para o Insper Coding
 - Pulo: https://pixabay.com/sound-effects/cartoon-jump-6462/ 
 - Morte: https://quicksounds.com/sound/102/mario-death          
 [créditos para Super Mario Bros]
+- Tiro do Inimigo: 
+- Hit do inimigo: 
 
 #### Tile Map:
 - https://github.com/Rkzzin/Fox-Wox-Pygame 
