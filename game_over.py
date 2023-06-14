@@ -10,7 +10,7 @@ from assets import load_assets, toca_musica
 from config import MORTO, FECHAR, PRETO, FPS, INICIO
 
 # Importando chaves
-from assets import GAMEOVER, JUMPSCARE
+from assets import CENARIO_GAMEOVER, JUMPSCARE
 
 def game_over(tela):
         
@@ -18,16 +18,19 @@ def game_over(tela):
     state = MORTO
     
     # Toca música do game over
-    toca_musica('assets/sons/som_game_over.mp3')
+    # toca_musica('assets/sons/som_game_over.mp3')
 
     # Colocando background
     tela.fill(PRETO)
-    tela.blit(assets[GAMEOVER], (0,0))
+    tela.blit(assets[CENARIO_GAMEOVER], (0,0))
+
+    # Depois inverte o display.
+    pygame.display.flip()
 
     # Variável para o ajuste de velocidade
     relogio = pygame.time.Clock()
 
-    # ----- Loop principal 
+    # ===== Loop principal =====
     rodando = True
     while rodando and state != FECHAR:
 
@@ -54,22 +57,28 @@ def game_over(tela):
                     # 5% de chance de dar um jumpscare
                     if chance < 5:
                         # Tempo passado
-                        tempo = (pygame.time.get_ticks - espaco)/1000
-
-                        # Colocando jumpscare
-                        tela.fill(PRETO)
-                        tela.blit(assets[JUMPSCARE], (0,0))
+                        tempo = (pygame.time.get_ticks() - espaco)/1000
 
                         # Tirando jumpscare
-                        while tempo < 2:
-                            tempo = (pygame.time.get_ticks - espaco)/1000
+                        while tempo < 2.5:
+                            # Mudando a tela conforme o tempo
+                            if tempo <= 2:
+                                # Colocando tela preta
+                                tela.fill(PRETO)
+                            else:  
+                                # Colocando jumpscare
+                                tela.fill(PRETO)
+                                tela.blit(assets[JUMPSCARE], (0,0))
+
+                            # Depois inverte o display.
+                            pygame.display.flip()
+
+                            # Atualiza o tempo
+                            tempo = (pygame.time.get_ticks() - espaco)/1000
                     
                     # Voltando ao início
                     state = INICIO
                     rodando = False
-        
-        # Depois inverte o display.
-        pygame.display.flip()
 
     # Retornando o estado
     return state

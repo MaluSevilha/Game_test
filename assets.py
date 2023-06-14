@@ -73,7 +73,7 @@ def load_assets():
     assets[CENARIO_GAMEOVER] = pygame.image.load(path.join(CENARIOS_DIR, 'cenario_gameover.png')).convert()
     assets[CENARIO_GAMEOVER] = pygame.transform.scale(assets[CENARIO_GAMEOVER], (LARGURA, ALTURA))
 
-    assets[JUMPSCARE] = pygame.image.load(path.join(CENARIOS_DIR, 'cenario_gameover.png')).convert()
+    assets[JUMPSCARE] = pygame.image.load(path.join(CENARIOS_DIR, 'jumpscare.png')).convert()
     assets[JUMPSCARE] = pygame.transform.scale(assets[JUMPSCARE], (LARGURA, ALTURA))
 
     # ---- Plataforma Instrução
