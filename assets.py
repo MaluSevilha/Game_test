@@ -15,7 +15,7 @@ CENARIO_VITORIA = 'cenario vitoria'
 CENARIO_INSTRUCAO = 'cenario instrução'
 CENARIO_BASE = 'cenario base'
 CENARIO_GAMEOVER = 'cenario gameover'
-JUMPSCARE = 'jumpscare'
+JUMPSCARE_IMG = 'jumpscare img'
 
 # ---- Tiles
 BASE = 'grama base'
@@ -42,6 +42,7 @@ VITORIA_SOM = 'soundtrack_vitoria'
 
 # ---- Efeitos sonoros
 DESLIGANDO_LUZ = 'desligando luz'
+JUMPSCARE_SND = 'jumpscare snd'
 
 # ---- Jogador
 JOGADOR_DIREITA_IMG = 'jogador direita'
@@ -73,8 +74,8 @@ def load_assets():
     assets[CENARIO_GAMEOVER] = pygame.image.load(path.join(CENARIOS_DIR, 'cenario_gameover.png')).convert()
     assets[CENARIO_GAMEOVER] = pygame.transform.scale(assets[CENARIO_GAMEOVER], (LARGURA, ALTURA))
 
-    assets[JUMPSCARE] = pygame.image.load(path.join(CENARIOS_DIR, 'jumpscare.png')).convert()
-    assets[JUMPSCARE] = pygame.transform.scale(assets[JUMPSCARE], (LARGURA, ALTURA))
+    assets[JUMPSCARE_IMG] = pygame.image.load(path.join(CENARIOS_DIR, 'jumpscare.png')).convert()
+    assets[JUMPSCARE_IMG] = pygame.transform.scale(assets[JUMPSCARE_IMG], (LARGURA, ALTURA))
 
     # ---- Plataforma Instrução
     assets[PLATAFORMA_BASE] = pygame.image.load(path.join(PLATAFORMA_DIR, 'plataforma_teste.png')).convert_alpha()
@@ -127,6 +128,7 @@ def load_assets():
 
     # Carregando efeitos sonoros dentro do dicionário
     assets[DESLIGANDO_LUZ] = pygame.mixer.Sound(path.join(SND_DIR, 'desligando_luz.mp3'))
+    assets[JUMPSCARE_SND] = pygame.mixer.Sound(path.join(SND_DIR, 'jumpscare.mp3'))
 
     # Carregando nos soundtracks dentro do dicionário
     assets[INICIO_SOM] = path.join(SND_DIR, 'soundtrack_init.mp3')

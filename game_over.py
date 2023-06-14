@@ -10,7 +10,7 @@ from assets import load_assets, toca_musica
 from config import MORTO, FECHAR, PRETO, FPS, INICIO
 
 # Importando chaves
-from assets import CENARIO_GAMEOVER, JUMPSCARE
+from assets import CENARIO_GAMEOVER, JUMPSCARE_IMG, JUMPSCARE_SND
 
 def game_over(tela):
         
@@ -55,7 +55,7 @@ def game_over(tela):
                     chance = random.randint(0, 100)
 
                     # 5% de chance de dar um jumpscare
-                    if chance < 5:
+                    if chance < 50:
                         # Tempo passado
                         tempo = (pygame.time.get_ticks() - espaco)/1000
 
@@ -67,8 +67,12 @@ def game_over(tela):
                                 tela.fill(PRETO)
                             else:  
                                 # Colocando jumpscare
+                                # ---- Som
+                                assets[JUMPSCARE_SND].play()
+
+                                # ---- Imagem
                                 tela.fill(PRETO)
-                                tela.blit(assets[JUMPSCARE], (0,0))
+                                tela.blit(assets[JUMPSCARE_IMG], (0,0))
 
                             # Depois inverte o display.
                             pygame.display.flip()
