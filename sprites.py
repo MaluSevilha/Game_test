@@ -182,3 +182,92 @@ class Tile(pygame.sprite.Sprite):
         # Posiciona o tile com base na linha e coluna passada no "MAP"
         self.rect.x = TILE * column
         self.rect.y = TILE * row
+
+
+class Inimigo(pygame.sprite.Sprite):
+    def __init__(self, groups, assets, posx, posy):
+        # Construtor da classe mãe (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        # Definindo a imagem
+        self.sprites = assets[INIMIGO_IMG]
+        self.frame = 0
+
+        self.image = self.sprites[self.frame]
+        self.mask = pygame.mask.from_surface(self.image)
+
+        # Cria o retângulo de referência
+        self.rect = self.image.get_rect()
+
+        # Posiciona o jogador
+        self.x_inicial = posx
+        self.rect.centerx = posx
+        self.rect.bottom = posy
+
+        # Cria variáveis do jogador e grupos
+        # ----- Atirar
+        self.ultimo_tiro = pygame.time.get_ticks()
+        self.tempo_tiro = 150
+
+        # ----- Imagens
+        self.ultimo_frame = pygame.time.get_ticks()
+        self.tempo_frame = 75
+
+        # ----- Velocidade
+        self.speedy = 0
+        self.speedx = 2
+
+        # ----- Vida
+        self.vida = 3
+
+        # ----- Grupos
+        self.groups = groups
+        self.assets = assets
+    
+    def update(self):
+        # Verifica se podetrocar imagem
+        agora = pygame.time.get_ticks()
+
+        # Verifica quantos ticks se passaram desde o último tiro.
+        tempo_passado = agora - self.ultimo_frame
+
+        # Se já pode atirar novamente...
+        if tempo_passado > self.tempo_frame:
+            # Marca o tick da nova imagem
+            self.ultimo_tiro = agora
+
+            # Atualizando frame
+            if self.frame == len(self.sprites) - 1:
+                self.frame = 0
+            else:
+                self.frame += 1
+
+            # Atualizando imagem
+            self.image = self.sprites[self.frame]
+            self.mask = pygame.mask.from_surface(self.image)
+        
+        # Atualizando posicao
+        if self.rect.x - self.x_inicial == 5:
+            velocidade = - self.speedx
+        
+        elif self.rect.x - self.x_inicial == -5:
+            velocidade = self.speedx
+
+        self.rect.x += velocidade
+
+        # Atualizando tiros
+        # Verifica quantos ticks se passaram desde o último tiro.
+        tempo_passado_tiro = agora - self.ultimo_tiro
+
+        # Se já pode atirar novamente...
+        if tempo_passado_tiro > self.tempo_tiro:
+            # Marca o tick da nova imagem.
+            self.ultimo_tiro = agora
+
+            # A nova bala vai ser criada
+            novo_tiro = Bala_Inimigo(self.assets, self.rect.centery, self.rect.centerx, self)
+            self.groups['all_sprites'].add(novo_tiro)
+            self.groups['all_tiros'].add(novo_tiro)
+
+            # Tocando barulho de tiro
+            # self.assets[TIRO_SOM].play()
