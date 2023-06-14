@@ -1,5 +1,5 @@
 import pygame
-from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, PULO_SOM
+from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, PULO_SOM, TIRO_SOM
 from assets import JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG, PLATAFORMA_BASE, BALA_IMG
 from config import INSTRUCAO, ALTURA, LARGURA, VEL_PULO, NO_CHAO, PULANDO, GRAVIDADE, ALTURA_JOGADOR, TILE
 
@@ -137,11 +137,13 @@ class Jogador(pygame.sprite.Sprite):
             # Marca o tick da nova imagem.
             self.ultimo_tiro = agora
 
-            # A nova bala vai ser criada logo acima e no centro horizontal da nave
+            # A nova bala vai ser criada
             novo_tiro = Bala(self.assets, self.rect.centery, self.rect.centerx, self)
             self.groups['all_sprites'].add(novo_tiro)
             self.groups['all_tiros'].add(novo_tiro)
-            # self.assets[TIRO_SND].play()
+
+            # Tocando barulho de tiro
+            self.assets[TIRO_SOM].play()
 
 class Plataforma(pygame.sprite.Sprite):
     def __init__(self, groups, assets):

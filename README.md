@@ -21,7 +21,7 @@ Projeto para o Insper Coding
 - Desligando a luz: https://www.fesliyanstudios.com/royalty-free-sound-effects-download/light-switch-24 
 - Jumpscare: https://www.fesliyanstudios.com/royalty-free-music/download/jump-scare-l/2393 
 - Morte: 
-- Tiro:
+- Tiro: https://pixabay.com/sound-effects/shoot02wav-14562/ 
 - Pulo: https://pixabay.com/sound-effects/cartoon-jump-6462/ 
 
 #### Tile Map:

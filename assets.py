@@ -45,6 +45,7 @@ GAMEOVER_SOM = 'soundtrack gameover'
 DESLIGANDO_LUZ = 'desligando luz'
 JUMPSCARE_SOM = 'jumpscare snd'
 PULO_SOM = 'pulo som'
+TIRO_SOM = 'tiro som'
 
 # ---- Jogador
 JOGADOR_DIREITA_IMG = 'jogador direita'
@@ -131,8 +132,12 @@ def load_assets():
     # Carregando efeitos sonoros dentro do dicionário
     assets[DESLIGANDO_LUZ] = pygame.mixer.Sound(path.join(SND_DIR, 'desligando_luz.mp3'))
     assets[JUMPSCARE_SOM] = pygame.mixer.Sound(path.join(SND_DIR, 'jumpscare.mp3'))
+
     assets[PULO_SOM] = pygame.mixer.Sound(path.join(SND_DIR, 'pulo.mp3'))
     assets[PULO_SOM].set_volume(0.2)
+
+    assets[TIRO_SOM] = pygame.mixer.Sound(path.join(SND_DIR, 'tiro.mp3'))
+    assets[TIRO_SOM].set_volume(0.35)
 
     # Carregando nos soundtracks dentro do dicionário
     assets[INICIO_SOM] = path.join(SND_DIR, 'soundtrack_init.mp3')
