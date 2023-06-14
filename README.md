@@ -14,7 +14,7 @@ Projeto para o Insper Coding
 #### Músicas:
 - Soundtrack do Início: https://www.fesliyanstudios.com/royalty-free-music/download/dark-fog/265 
 - Soundtrack vitória: https://www.fesliyanstudios.com/royalty-free-music/downloads-c/peaceful-and-relaxing-music/22 
-- Soundtrack GameOver: 
+- Soundtrack GameOver: https://www.fesliyanstudios.com/royalty-free-music/download/scarey-atmospheres-ch-1/162 
 - Soundtrack Jogo:
 
 #### Efeitos Sonoros:

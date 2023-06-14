@@ -39,6 +39,7 @@ BALA_IMG = 'imagem bala'
 # ---- Sons
 INICIO_SOM = 'soundtrack inicial'
 VITORIA_SOM = 'soundtrack_vitoria'
+GAMEOVER_SOM = 'soundtrack gameover'
 
 # ---- Efeitos sonoros
 DESLIGANDO_LUZ = 'desligando luz'
@@ -133,6 +134,7 @@ def load_assets():
     # Carregando nos soundtracks dentro do dicionário
     assets[INICIO_SOM] = path.join(SND_DIR, 'soundtrack_init.mp3')
     assets[VITORIA_SOM] = path.join(SND_DIR, 'soundtrack_vitoria.mp3')
+    assets[GAMEOVER_SOM] = path.join(SND_DIR, 'soundtrack_gameover.mp3')
 
     # Retorna o dicionários com as assets
     return assets

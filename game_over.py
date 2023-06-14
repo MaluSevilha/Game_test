@@ -10,15 +10,18 @@ from assets import load_assets, toca_musica
 from config import MORTO, FECHAR, PRETO, FPS, INICIO
 
 # Importando chaves
-from assets import CENARIO_GAMEOVER, JUMPSCARE_IMG, JUMPSCARE_SND
+from assets import CENARIO_GAMEOVER, JUMPSCARE_IMG, JUMPSCARE_SND, GAMEOVER_SOM
 
 def game_over(tela):
         
     assets = load_assets()
     state = MORTO
     
+    # ===== Loop principal =====
+    pygame.mixer.music.play(loops = -1)
+
     # Toca música do game over
-    # toca_musica('assets/sons/som_game_over.mp3')
+    toca_musica(assets[GAMEOVER_SOM])
 
     # Colocando background
     tela.fill(PRETO)
@@ -65,6 +68,9 @@ def game_over(tela):
                             if tempo <= 2:
                                 # Colocando tela preta
                                 tela.fill(PRETO)
+                                
+                                # Parando a música
+                                pygame.mixer.music.stop()
                             else:  
                                 # Colocando jumpscare
                                 # ---- Som
