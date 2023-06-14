@@ -1,5 +1,6 @@
 import pygame
-from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG, PLATAFORMA_BASE, BALA_IMG
+from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, PULO_SOM
+from assets import JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG, PLATAFORMA_BASE, BALA_IMG
 from config import INSTRUCAO, ALTURA, LARGURA, VEL_PULO, NO_CHAO, PULANDO, GRAVIDADE, ALTURA_JOGADOR, TILE
 
 class Bala(pygame.sprite.Sprite):
@@ -111,12 +112,18 @@ class Jogador(pygame.sprite.Sprite):
     def pular(self):
         # Só pode pular quando estiver em contato com o chão
         if self.state != PULANDO:
+            # Atualiza a imagem
             if self.orientacao == 'direita':
                 self.image = self.assets[JOGADOR_PULA_DIREITA_IMG]
             else:
                 self.image = self.assets[JOGADOR_PULA_ESQUERDA_IMG]
+            
+            # ATualiza o estado e a velocidade [no eixo y]
             self.speedy -= VEL_PULO
             self.state = PULANDO
+
+            # Toca o som de pulo
+            self.assets[PULO_SOM].play()
     
     def atirar(self):
         # Verifica se pode atirar
