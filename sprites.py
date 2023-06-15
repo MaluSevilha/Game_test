@@ -224,15 +224,15 @@ class Inimigo(pygame.sprite.Sprite):
         # Cria o retângulo de referência
         self.rect = self.image.get_rect()
 
-        # Posiciona o jogador
+        # Posiciona o inimigo
         self.x_inicial = posx
         self.rect.centerx = posx
         self.rect.bottom = posy
 
-        # Cria variáveis do jogador e grupos
+        # Cria variáveis do inimigo e grupos
         # ----- Atirar
         self.ultimo_tiro = pygame.time.get_ticks()
-        self.tempo_tiro = 550
+        self.tempo_tiro = 800
 
         # ----- Imagens
         self.ultimo_frame = pygame.time.get_ticks()

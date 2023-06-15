@@ -26,6 +26,7 @@ Projeto para o Insper Coding
 [créditos para Super Mario Bros]
 - Tiro do Inimigo: 
 - Hit do inimigo: 
+- Morte do inimigo: 
 
 #### Tile Map:
 - https://github.com/Rkzzin/Fox-Wox-Pygame 

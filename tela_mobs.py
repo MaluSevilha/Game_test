@@ -248,6 +248,19 @@ def tela_mobs(tela):
             # Impedindo que tire mais de uma vez 
             colisao_inimigos = []
         
+        colisao_tiros = pygame.sprite.groupcollide(all_inimigos, all_tiros, False, True)
+        # Tirando uma vida caso esteja em contato com um inimigo 
+        for inimigo in colisao_tiros:
+            # Tirando uma vida do inimigo
+            inimigo.vida -= 1
+            
+            # Caso ele não tenha mais vidas
+            if inimigo.vida <= 0:
+                inimigo.kill()
+            
+            # Impedindo que tire mais de uma vez 
+            colisao_tiros = []
+        
         # Se o jogador está sem vidas
         if vidas <= 0:
             state = MORTO
