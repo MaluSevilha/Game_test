@@ -11,6 +11,7 @@ from config import CENARIOS_DIR, SND_DIR, JOGADOR_DIR, TILES_DIR, PLATAFORMA_DIR
 # Definindo chaves do dicionário assets
 # ---- Cenários
 CENARIO_INIT = 'cenario inicio'
+COMANDOS = 'comando'
 CENARIO_VITORIA = 'cenario vitoria'
 CENARIO_INSTRUCAO = 'cenario instrução'
 CENARIO_BASE = 'cenario base'
@@ -69,6 +70,8 @@ def load_assets():
     # ---- Cenários
     assets[CENARIO_INIT] = pygame.image.load(path.join(CENARIOS_DIR, 'cenario_ini.png')).convert()
     assets[CENARIO_INIT] = pygame.transform.scale(assets[CENARIO_INIT], (LARGURA, ALTURA))
+    assets[COMANDOS] = pygame.image.load(path.join(CENARIOS_DIR, 'comandos_instrucao.png')).convert()
+    assets[COMANDOS] = pygame.transform.scale(assets[COMANDOS], (0.8*760, 0.8*375))
 
     assets[CENARIO_VITORIA] = pygame.image.load(path.join(CENARIOS_DIR, 'cenario_vitoria.png')).convert()
     assets[CENARIO_VITORIA] = pygame.transform.scale(assets[CENARIO_VITORIA], (LARGURA, ALTURA))

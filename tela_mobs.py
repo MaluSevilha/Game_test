@@ -85,6 +85,7 @@ def tela_mobs(tela):
     # Variáveis necessárias para o jogo
     keys_down = {}
     vidas = 3
+    score = 0
     player_vivo = True
     state = SALA_MOBS
 
@@ -257,6 +258,7 @@ def tela_mobs(tela):
             # Caso ele não tenha mais vidas
             if inimigo.vida <= 0:
                 inimigo.kill()
+                score += 1
             
             # Impedindo que tire mais de uma vez 
             colisao_tiros = []
@@ -282,7 +284,7 @@ def tela_mobs(tela):
                 player.state = PULANDO
 
         # Se o jogador aravessou a sala
-        if player.rect.right >= 875:
+        if player.rect.right >= 875 and score >= 5:
             state = SALA_BOSS
     
         # ----- Atualiza estado do jogo

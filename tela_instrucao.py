@@ -4,7 +4,7 @@ import pygame
 # Importando arquivos
 from config import FECHAR, INSTRUCAO, SALA_MOBS, FPS, VEL_CORRER, PRETO, PULANDO, GRAVIDADE, NA_PLATAFORMA, ALTURA
 from sprites import Jogador, Plataforma
-from assets import load_assets, toca_musica, CENARIO_INSTRUCAO
+from assets import load_assets, toca_musica, CENARIO_INSTRUCAO, COMANDOS
 
 # Importando imagens do jogador
 from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG
@@ -145,6 +145,7 @@ def tela_instrucao(tela):
         # ----- Gera saídas
         tela.fill(PRETO)                                # Preenche com a cor preta
         tela.blit(assets[CENARIO_INSTRUCAO], (0, 0))
+        tela.blit(assets[COMANDOS], (0,0))
 
         # Desenhando sprites
         all_sprites.draw(tela)
