@@ -8,13 +8,13 @@ import random
 from config import FECHAR, PULANDO, SALA_BOSS, MORTO, GANHOU, NA_PLATAFORMA
 
 # Importando variáveis relevantes
-from config import ALTURA, VEL_CORRER, MAPA_BOSS, FPS, VERMELHO, PRETO
+from config import ALTURA, VEL_CORRER, MAPA_BOSS, FPS, VERMELHO, PRETO, LARGURA_BOSS
 
 # Importando classes
 from sprites import Jogador, Tile, Boss
 
 # Importando chaves de assets
-from assets import load_assets, ACIDO, ACIDO_FUNDO, ND, FONTE, CENARIO_BASE, MORTE_SOM, DANO_INIMIGO_SOM
+from assets import load_assets, ACIDO, ACIDO_FUNDO, ND, FONTE, CENARIO_BASE, MORTE_SOM, DANO_INIMIGO_SOM, VIDA_BOSS
 
 # Importando imagens dos jogadores
 from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG
@@ -72,6 +72,11 @@ def tela_boss(tela):
     vidas = 3
     score = 0
     player_vivo = True
+
+    # Para mostrar a vida do boss
+    boss_morto = False
+    vida_boss = assets[VIDA_BOSS][0]
+    frame = 0
 
     # ===== Loop principal =====
     state = SALA_BOSS
@@ -246,13 +251,17 @@ def tela_boss(tela):
             # Perdendo uma vida
             boss.vida -= 1
 
+            # Atualiza a sua vida
+            frame += 1
+
             # Toca efeito sonoro 
             assets[DANO_INIMIGO_SOM].play()
-            
+
             # Recriando o jogador
             if boss.vida <= 0:
                 boss.kill()
-                state = GANHOU
+                matou = pygame.time.get_ticks()
+                boss_morto = True
             
             # Impedindo que tire mais de uma vez 
             colisao_boss_tiro = []
@@ -298,6 +307,15 @@ def tela_boss(tela):
         text_rect.bottomleft = (10, ALTURA - 10)
         tela.blit(text_surface, text_rect)
 
+        # ----- Colocando a vida do boss
+        if not boss_morto:
+            tela.blit(assets[VIDA_BOSS][frame], (boss.rect.centerx - LARGURA_BOSS/2, boss.rect.bottom + 2))
+        
+        else:
+            tempo_passado = (pygame.time.get_ticks() - matou)/1000
+            if tempo_passado > 3:
+                state = GANHOU
+        
         # ----- Coloca personagens
         all_sprites.draw(tela)
 

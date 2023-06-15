@@ -4,7 +4,7 @@ from os import path
 
 # Importando tamanho da tela e de compoentes
 from config import LARGURA, ALTURA, LARGURA_JOGADOR, ALTURA_JOGADOR, TILE, ALTURA_INIMIGO, LARGURA_INIMIGO
-from config import LARGURA_BOSS, ALTURA_BOSS
+from config import LARGURA_BOSS, ALTURA_BOSS, VIDA_BOSS_DIR
 
 # Importando caminhos
 from config import CENARIOS_DIR, SND_DIR, JOGADOR_DIR, TILES_DIR, ADICIONAIS_DIR, INIMIGO_DIR, FONTE_DIR
@@ -35,6 +35,7 @@ ACIDO_FUNDO = 'acido fundo'
 # ---- Outros adicionais
 PLATAFORMA_BASE = 'plataforma instruções'
 SETA = 'seta'
+VIDA_BOSS = 'vida boss'
 
 # ---- Bala
 BALA_IMG = 'imagem bala'
@@ -162,6 +163,13 @@ def load_assets():
 
     assets[BOSS_IMG] = pygame.image.load(path.join(INIMIGO_DIR, 'boss.png')).convert_alpha()
     assets[BOSS_IMG] = pygame.transform.scale(assets[BOSS_IMG], (LARGURA_BOSS, ALTURA_BOSS))
+
+    assets[VIDA_BOSS]  = []
+    for i in range(10):
+        arquivo = str(i) + '.png'
+        imagem = pygame.image.load(path.join(VIDA_BOSS_DIR, arquivo)).convert_alpha()
+        imagem = pygame.transform.scale(imagem, (LARGURA_BOSS, 25*6))
+        assets[VIDA_BOSS].append(imagem)
 
     # ---- Fonte
     # Juntando a fonte do score à ele

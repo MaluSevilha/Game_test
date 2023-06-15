@@ -9,6 +9,7 @@ TILES_DIR = path.join(path.dirname(__file__), 'assets', 'imagens', 'tiles')
 JOGADOR_DIR = path.join(path.dirname(__file__), 'assets', 'imagens', 'jogador')
 INIMIGO_DIR = path.join(path.dirname(__file__), 'assets', 'imagens', 'inimigos') 
 ADICIONAIS_DIR = path.join(path.dirname(__file__), 'assets', 'imagens')
+VIDA_BOSS_DIR = path.join(path.dirname(__file__), 'assets', 'imagens', 'boss_vida')
 
 # Dados gerais do jogo.
 TILE = 38                   # Tamanho de um tile [37,5 x 37,5]
