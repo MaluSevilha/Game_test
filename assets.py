@@ -6,7 +6,7 @@ from os import path
 from config import LARGURA, ALTURA, LARGURA_JOGADOR, ALTURA_JOGADOR, TILE, ALTURA_INIMIGO, LARGURA_INIMIGO
 
 # Importando caminhos
-from config import CENARIOS_DIR, SND_DIR, JOGADOR_DIR, TILES_DIR, PLATAFORMA_DIR, INIMIGO_DIR, FONTE_DIR
+from config import CENARIOS_DIR, SND_DIR, JOGADOR_DIR, TILES_DIR, ADICIONAIS_DIR, INIMIGO_DIR, FONTE_DIR
 
 # Definindo chaves do dicionário assets
 # ---- Cenários
@@ -31,8 +31,9 @@ ND = 'vazio'
 ACIDO = 'acido'
 ACIDO_FUNDO = 'acido fundo'
 
-# ---- Plataforma para instruções
+# ---- Outros adicionais
 PLATAFORMA_BASE = 'plataforma instruções'
+SETA = 'seta'
 
 # ---- Bala
 BALA_IMG = 'imagem bala'
@@ -94,13 +95,12 @@ def load_assets():
     assets[JUMPSCARE_IMG] = pygame.image.load(path.join(CENARIOS_DIR, 'jumpscare.png')).convert()
     assets[JUMPSCARE_IMG] = pygame.transform.scale(assets[JUMPSCARE_IMG], (LARGURA, ALTURA))
 
-    # ---- Plataforma Instrução
-    assets[PLATAFORMA_BASE] = pygame.image.load(path.join(PLATAFORMA_DIR, 'plataforma_teste.png')).convert_alpha()
+    # ---- Extras
+    assets[PLATAFORMA_BASE] = pygame.image.load(path.join(ADICIONAIS_DIR, 'plataforma_teste.png')).convert_alpha()
     assets[PLATAFORMA_BASE] = pygame.transform.scale(assets[PLATAFORMA_BASE], (5*TILE, TILE))
 
-    # ---- Bala
-    assets[BALA_IMG] = pygame.image.load(path.join(PLATAFORMA_DIR, 'bala.png')).convert_alpha()
-    assets[BALA_IMG] = pygame.transform.scale(assets[BALA_IMG], (15, 7.5))
+    assets[SETA] = pygame.image.load(path.join(ADICIONAIS_DIR, 'seta.png')).convert_alpha()
+    assets[SETA] = pygame.transform.scale(assets[SETA], (5*TILE, TILE))
 
     # ---- Tiles
     assets[BASE] = pygame.image.load(path.join(TILES_DIR, 'chao_basico.png')).convert_alpha()
@@ -142,6 +142,9 @@ def load_assets():
 
     assets[JOGADOR_PULA_ESQUERDA_IMG] = pygame.image.load(path.join(JOGADOR_DIR, 'toad_pula_esquerda.png')).convert_alpha()
     assets[JOGADOR_PULA_ESQUERDA_IMG] = pygame.transform.scale(assets[JOGADOR_PULA_ESQUERDA_IMG], (LARGURA_JOGADOR, ALTURA_JOGADOR))
+
+    assets[BALA_IMG] = pygame.image.load(path.join(JOGADOR_DIR, 'bala.png')).convert_alpha()
+    assets[BALA_IMG] = pygame.transform.scale(assets[BALA_IMG], (15, 7.5))
 
     # ---- Inimigo
     assets[TIRO_INIMIGO_IMG] = pygame.image.load(path.join(INIMIGO_DIR, 'tiro_inimigo.png')).convert_alpha()
