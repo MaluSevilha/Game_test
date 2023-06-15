@@ -295,7 +295,7 @@ def tela_mobs(tela):
                 player.state = PULANDO
 
         # Se o jogador atravessou a sala
-        if score >= 5 and player.rect.right >= 875:
+        if score >= 5 and player.rect.right >= 875 and player.rect.bottom <= 150:
             # Passar de sala
             state = SALA_BOSS
     
