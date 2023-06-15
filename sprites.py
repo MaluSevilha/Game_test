@@ -185,7 +185,7 @@ class Tile(pygame.sprite.Sprite):
 
 class Bala_Inimigo(pygame.sprite.Sprite):
     # Construtor da classe
-    def __init__(self, assets, centery, centerx):
+    def __init__(self, assets, centery, centerx, velocidade):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
         
@@ -199,7 +199,7 @@ class Bala_Inimigo(pygame.sprite.Sprite):
         self.rect.bottom = centery
         
         # Determinando a velocidade do tiro
-        self.speedx = - 10
+        self.speedx = - velocidade
 
     def update(self):
         # A bala só se move no eixo y
@@ -210,7 +210,7 @@ class Bala_Inimigo(pygame.sprite.Sprite):
             self.kill()
 
 class Inimigo(pygame.sprite.Sprite):
-    def __init__(self, groups, assets, posx, posy):
+    def __init__(self, groups, assets, posx, posy, vel_bala):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
         
@@ -232,7 +232,7 @@ class Inimigo(pygame.sprite.Sprite):
         # Cria variáveis do jogador e grupos
         # ----- Atirar
         self.ultimo_tiro = pygame.time.get_ticks()
-        self.tempo_tiro = 200
+        self.tempo_tiro = 450
 
         # ----- Imagens
         self.ultimo_frame = pygame.time.get_ticks()
@@ -242,6 +242,7 @@ class Inimigo(pygame.sprite.Sprite):
         self.speedy = 0
         self.speedx = 2
         self.velocidade = self.speedx
+        self.vel_bala = vel_bala
 
         # ----- Vida
         self.vida = 3
@@ -291,7 +292,7 @@ class Inimigo(pygame.sprite.Sprite):
             self.ultimo_tiro = agora
 
             # A nova bala vai ser criada
-            novo_tiro = Bala_Inimigo(self.assets, self.rect.centery, self.rect.centerx)
+            novo_tiro = Bala_Inimigo(self.assets, self.rect.centery, self.rect.centerx, self.vel_bala)
             self.groups['all_sprites'].add(novo_tiro)
             self.groups['all_tiros_inimigo'].add(novo_tiro)
 

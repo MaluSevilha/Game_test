@@ -1,4 +1,5 @@
 import pygame
+import random
 
 # Importando estados
 from config import FECHAR, PULANDO, SALA_MOBS, SALA_BOSS, NA_PLATAFORMA, MORTO
@@ -49,15 +50,23 @@ def tela_mobs(tela):
     all_sprites.add(player)
 
     # Criando inimigos
-    # ---- posicionando os inimigos
-    posicoes = [(305, 531), (599, 380), (494, 151), (846, 227), (815, 606)]
+    # ---- Velocidades das balas
+    velocidades_balas = [10, 9, 8]
+
+    # ---- Posicionando os inimigos
+    posicoes = [(305, 535), (599, 384), (494, 155), (846, 231), (815, 610)]
 
     # Colocando cada inimigo em uma posição
     for posicao in posicoes:
+        # Definindo variáveis do inimigo
         x = posicao[0]
         y = posicao[1]
+        vel_bala = random.choice(velocidades_balas)
 
-        inimigo = Inimigo(groups, assets, x, y)
+        # Criando o inimigo
+        inimigo = Inimigo(groups, assets, x, y, vel_bala)
+
+        # Adicionando-o aos seus grupos
         all_sprites.add(inimigo)
         all_inimigos.add(inimigo)
 
@@ -201,6 +210,44 @@ def tela_mobs(tela):
             # Impedindo que tire mais de uma vez 
             colisao_acido = []
 
+        colisao_tiros = pygame.sprite.spritecollide(player, all_tiros_inimigos, True)
+        # Tirando uma vida caso esteja em contato com uma bala do inimigo 
+        if len(colisao_tiros) > 0:
+            # Perdendo uma vida
+            vidas -= 1
+
+            # Matando o jogador
+            player.kill()
+
+            # Tocando som de morte
+            assets[MORTE_SOM].play()
+
+            # Recriando o jogador
+            if vidas > 0:
+                player_vivo = False
+            
+            # Impedindo que tire mais de uma vez 
+            colisao_tiros = []
+        
+        colisao_inimigos = pygame.sprite.spritecollide(player, all_inimigos, False)
+        # Tirando uma vida caso esteja em contato com um inimigo 
+        if len(colisao_inimigos) > 0:
+            # Perdendo uma vida
+            vidas -= 1
+
+            # Matando o jogador
+            player.kill()
+
+            # Tocando som de morte
+            assets[MORTE_SOM].play()
+
+            # Recriando o jogador
+            if vidas > 0:
+                player_vivo = False
+            
+            # Impedindo que tire mais de uma vez 
+            colisao_inimigos = []
+        
         # Se o jogador está sem vidas
         if vidas < 0:
             state = MORTO
