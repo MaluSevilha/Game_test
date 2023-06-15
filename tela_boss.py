@@ -5,7 +5,7 @@ def tela_boss(tela):
 import random
 
 # Importando estados
-from config import FECHAR, PULANDO, SALA_BOSS, MORTO, GANHOU
+from config import FECHAR, PULANDO, SALA_BOSS, MORTO, GANHOU, NA_PLATAFORMA
 
 # Importando variáveis relevantes
 from config import ALTURA, VEL_CORRER, MAPA_BOSS, FPS, VERMELHO, PRETO
@@ -14,7 +14,7 @@ from config import ALTURA, VEL_CORRER, MAPA_BOSS, FPS, VERMELHO, PRETO
 from sprites import Jogador, Tile, Inimigo
 
 # Importando chaves de assets
-from assets import load_assets, ACIDO, ACIDO_FUNDO, ND, FONTE, CENARIO_BASE
+from assets import load_assets, ACIDO, ACIDO_FUNDO, ND, FONTE, CENARIO_BASE, MORTE_SOM
 
 # Importando imagens dos jogadores
 from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG
@@ -136,8 +136,82 @@ def tela_boss(tela):
                             player.speedx -= VEL_CORRER
                         if event.key == pygame.K_a:
                             player.speedx += VEL_CORRER
-    
-            # ----- Atualiza estado do jogo
+        
+         # Se colidir com a plataforma    
+        colisoes_tiles = pygame.sprite.spritecollide(player, all_blocos, False)
+
+        # Para cada colisão
+        if len(colisoes_tiles) > 0:
+            # Definindo uma colisão
+            colisao = colisoes_tiles[0]
+
+            # Definindo limites dos blocos
+            esquerda_bloco = colisao.rect.left
+            direita_bloco = colisao.rect.right
+
+            # Se o player colidir de baixo para cima
+            if player.rect.bottom > colisao.rect.bottom:
+                player.rect.top = colisao.rect.bottom
+                player.speedy = 0
+            
+            # Se o player colidir de cima para baixo
+            elif player.rect.top < colisao.rect.top:
+                player.rect.bottom = colisao.rect.top
+                player.speedy = 0
+                player.state = NA_PLATAFORMA
+
+                # Atualizando imagem do jogador
+                if player.orientacao == 'direita':
+                    player.image = assets[JOGADOR_DIREITA_IMG]
+                
+                else:
+                    player.image = assets[JOGADOR_ESQUERDA_IMG]
+            
+        # Impedindo que o player entre em um loop de colisões
+        colisoes_tiles = []
+        
+        # Conferindo se colidiu no ácido
+        colisao_acido = pygame.sprite.spritecollide(player, all_acido, False)
+
+        # Tirando uma vida caso esteja em contato com ácido 
+        if len(colisao_acido) > 0:
+            # Perdendo uma vida
+            vidas -= 1
+
+            # Matando o jogador
+            player.kill()
+
+            # Tocando som de morte
+            assets[MORTE_SOM].play()
+
+            # Recriando o jogador
+            if vidas > 0:
+                player_vivo = False
+            
+            # Impedindo que tire mais de uma vez 
+            colisao_acido = []
+        
+        # Se o jogador está sem vidas
+        if vidas <= 0:
+            state = MORTO
+        # Se o jogador possui vidas
+        else:
+            # Recriando o jogador, caso esse tenha morrido
+            if player_vivo == False:
+                # Recriando o jogador
+                player = Jogador(groups, assets, 20, ALTURA - 50)
+                all_sprites.add(player)
+                player_vivo = True
+
+                # Dando reestart nas teclas apertadas
+                keys_down = {}
+        
+        # Conferindo se o jogador saiu da plataforma
+        if player.state == NA_PLATAFORMA:
+            if player.rect.right <= esquerda_bloco or player.rect.left >= direita_bloco:
+                player.state = PULANDO
+        
+        # ----- Atualiza estado do jogo
         player.update(state)
         all_tiros.update()
         all_tiros_boss.update()
