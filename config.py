@@ -19,8 +19,8 @@ LARGURA_JOGADOR = 37.5      # Largura do jogador
 ALTURA_JOGADOR = 45         # Altura do jogador
 LARGURA_INIMIGO = 37.5      # Largura do inimigo
 ALTURA_INIMIGO = 45         # Altura inimigo   
-LARGURA_BOSS = 8*TILE       # Largura do bos
-ALTURA_BOSS = ALTURA - 20   # Altura do boss
+LARGURA_BOSS = 316        # Largura do boss
+ALTURA_BOSS = 250         # Altura do boss
 
 # Velocidades para o jogo
 VEL_CORRER = 5

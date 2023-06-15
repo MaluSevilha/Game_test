@@ -11,7 +11,7 @@ from config import FECHAR, PULANDO, SALA_BOSS, MORTO, GANHOU, NA_PLATAFORMA
 from config import ALTURA, VEL_CORRER, MAPA_BOSS, FPS, VERMELHO, PRETO
 
 # Importando classes
-from sprites import Jogador, Tile, Inimigo
+from sprites import Jogador, Tile, Boss
 
 # Importando chaves de assets
 from assets import load_assets, ACIDO, ACIDO_FUNDO, ND, FONTE, CENARIO_BASE, MORTE_SOM
@@ -35,6 +35,7 @@ def tela_boss(tela):
     all_blocos = pygame.sprite.Group()
     all_tiros = pygame.sprite.Group()
     all_tiros_boss = pygame.sprite.Group()
+    all_boss = pygame.sprite.Group()
 
     # Adicionando ao dicionário groups
     groups = {}
@@ -48,6 +49,11 @@ def tela_boss(tela):
     # Criando o jogador
     player = Jogador(groups, assets, 20, ALTURA - 50)
     all_sprites.add(player)
+
+    # Criando o Boss
+    boss = Boss(groups, assets)
+    all_sprites.add(boss)
+    all_boss.add(boss)
 
     # Criando tiles
     for linha in range (len(MAPA_BOSS)):
@@ -167,9 +173,11 @@ def tela_boss(tela):
                 else:
                     player.image = assets[JOGADOR_ESQUERDA_IMG]
             
-        # Impedindo que o player entre em um loop de colisões
-        colisoes_tiles = []
+            # Impedindo que o player entre em um loop de colisões
+            colisoes_tiles = []
         
+        colisao_tiros = pygame.sprite.groupcollide(all_tiros_boss, all_tiros, True, True)
+
         # Conferindo se colidiu no ácido
         colisao_acido = pygame.sprite.spritecollide(player, all_acido, False)
 
@@ -191,6 +199,61 @@ def tela_boss(tela):
             # Impedindo que tire mais de uma vez 
             colisao_acido = []
         
+        colisao_boss = pygame.sprite.spritecollide(player, all_boss, False)
+        
+        # Tirando uma vida caso esteja em contato com ácido 
+        if len(colisao_boss) > 0:
+            # Perdendo uma vida
+            vidas -= 1
+
+            # Matando o jogador
+            player.kill()
+
+            # Tocando som de morte
+            assets[MORTE_SOM].play()
+
+            # Recriando o jogador
+            if vidas > 0:
+                player_vivo = False
+            
+            # Impedindo que tire mais de uma vez 
+            colisao_boss = []
+        
+        colisao_tiro_boss = pygame.sprite.spritecollide(player, all_tiros_boss, True)
+        
+        # Tirando uma vida caso esteja em contato com um tiro
+        if len(colisao_tiro_boss) > 0:
+            # Perdendo uma vida
+            vidas -= 1
+
+            # Matando o jogador
+            player.kill()
+
+            # Tocando som de morte
+            assets[MORTE_SOM].play()
+
+            # Recriando o jogador
+            if vidas > 0:
+                player_vivo = False
+            
+            # Impedindo que tire mais de uma vez 
+            colisao_tiro_boss = []
+        
+        colisao_boss_tiro = pygame.sprite.spritecollide(boss, all_tiros, True)
+
+        # Tirando uma vida do bosscaso esse leve um tiro
+        if len(colisao_boss_tiro) > 0:
+            # Perdendo uma vida
+            boss.vida -= 1
+
+            # Recriando o jogador
+            if boss.vida <= 0:
+                boss.kill()
+                state = GANHOU
+            
+            # Impedindo que tire mais de uma vez 
+            colisao_boss_tiro = []
+        
         # Se o jogador está sem vidas
         if vidas <= 0:
             state = MORTO
@@ -205,7 +268,7 @@ def tela_boss(tela):
 
                 # Dando reestart nas teclas apertadas
                 keys_down = {}
-        
+    
         # Conferindo se o jogador saiu da plataforma
         if player.state == NA_PLATAFORMA:
             if player.rect.right <= esquerda_bloco or player.rect.left >= direita_bloco:
@@ -213,6 +276,7 @@ def tela_boss(tela):
         
         # ----- Atualiza estado do jogo
         player.update(state)
+        boss.update()
         all_tiros.update()
         all_tiros_boss.update()
 
@@ -221,8 +285,6 @@ def tela_boss(tela):
         tela.blit(assets[CENARIO_BASE], (0, 0))
 
         # Desenhando os tiles, os personagens e o fundo
-        # ----- Coloca personagens
-        all_sprites.draw(tela)
 
         # ----- Tiles
         all_tiles.draw(tela)
@@ -232,6 +294,9 @@ def tela_boss(tela):
         text_rect = text_surface.get_rect()
         text_rect.bottomleft = (10, ALTURA - 10)
         tela.blit(text_surface, text_rect)
+
+        # ----- Coloca personagens
+        all_sprites.draw(tela)
 
         # Inverte o display
         pygame.display.update()

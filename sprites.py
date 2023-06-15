@@ -3,7 +3,7 @@ import random
 
 from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, PULO_SOM, TIRO_SOM, INIMIGO_IMG, TIRO_INIMIGO_IMG
 from assets import JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG, PLATAFORMA_BASE, BALA_IMG, BOSS_IMG
-from config import INSTRUCAO, ALTURA, LARGURA, VEL_PULO, NO_CHAO, PULANDO, GRAVIDADE, TILE
+from config import INSTRUCAO, ALTURA, LARGURA, VEL_PULO, NO_CHAO, PULANDO, GRAVIDADE, TILE, ALTURA_BOSS
 
 class Bala(pygame.sprite.Sprite):
     # Construtor da classe
@@ -300,7 +300,7 @@ class Inimigo(pygame.sprite.Sprite):
 
 class Bala_Boss(pygame.sprite.Sprite):
     # Construtor da classe
-    def __init__(self, assets, centery, centerx, velocidade):
+    def __init__(self, assets, centery, centerx, velocidade, boss):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
         
@@ -316,6 +316,9 @@ class Bala_Boss(pygame.sprite.Sprite):
         # Determinando a velocidade do tiro
         self.speedx = - velocidade
 
+        # Boss
+        self.boss = boss
+
     def update(self):
         # A bala só se move no eixo y
         self.rect.x += self.speedx
@@ -323,6 +326,7 @@ class Bala_Boss(pygame.sprite.Sprite):
         # Se o tiro passar do inicio da tela, morre.
         if self.rect.left < 0 or self.rect.right > LARGURA:
             self.kill()
+            self.boss.tiros -= 1
 
 class Boss(pygame.sprite.Sprite):
     def __init__(self, groups, assets):
@@ -338,8 +342,8 @@ class Boss(pygame.sprite.Sprite):
 
         # Posiciona o inimigo
         self.y_inicial = ALTURA / 2
-        self.rect.centerx = ALTURA / 2
-        self.rect.bottom = 350
+        self.rect.centerx = LARGURA - 300
+        self.rect.bottom = ALTURA / 2 + ALTURA_BOSS/2
 
         # Cria variáveis do inimigo e grupos
         # ----- Atirar
@@ -349,44 +353,43 @@ class Boss(pygame.sprite.Sprite):
         # ----- Velocidade
         self.speedy = 4
         self.speedx = 0
+        self.velocidade = self.speedy
 
         # ----- Vida
         self.vida = 10
+
+        # ----- Tiros
+        self.tiros = 0
 
         # ----- Grupos
         self.groups = groups
         self.assets = assets
     
     def update(self):
-        # Verifica se podetrocar imagem
-        agora = pygame.time.get_ticks()
-        
         # Atualizando posicao
-        if self.rect.y - self.y_inicial >= 50:
-            self.velocidade = - self.speedx
+        if self.rect.centery - self.y_inicial >= ALTURA_BOSS/2:
+            self.velocidade = - self.speedy
         
-        elif self.rect.x - self.x_inicial <= -50:
-            self.velocidade = self.speedx
+        elif self.rect.centery - self.y_inicial <= - ALTURA_BOSS/2:
+            self.velocidade = self.speedy
 
-        self.rect.x += self.velocidade
+        self.rect.y += self.velocidade
 
         # Atualizando tiros
-        # Verifica quantos ticks se passaram desde o último tiro.
-        tempo_passado_tiro = agora - self.ultimo_tiro
+        # ---- Definindo a velocidade das balas
+        vel_bala = random.choice([5, 8, 9, 7])
 
-        # Se já pode atirar novamente...
-        if tempo_passado_tiro > self.tempo_tiro:
-            # Marca o tick da nova imagem.
-            self.ultimo_tiro = agora
+        # ---- Definindo a posição das balas
+        centro_y = self.rect.centery
 
-            # Definindo a velocidade das balas
-            vel_bala = random.choice([5, 8, 9, 7])
+        lista_centros_y = [centro_y - (ALTURA_BOSS/2), centro_y - (ALTURA_BOSS/3), centro_y + (ALTURA_BOSS/3), centro_y + (ALTURA_BOSS/2)]
 
-            # A nova bala vai ser criada
-            while len(self.groups['all_tiros_boss']) < 4:
-                novo_tiro = Bala_Boss(self.assets, self.rect.centery, self.rect.centerx, vel_bala)
-                self.groups['all_sprites'].add(novo_tiro)
-                self.groups['all_tiros_boss'].add(novo_tiro)
+        # ---- Nova bala vai ser criada
+        while self.tiros < 5:
+            novo_tiro = Bala_Boss(self.assets, random.choice(lista_centros_y), self.rect.centerx, vel_bala, self)
+            self.groups['all_sprites'].add(novo_tiro)
+            self.groups['all_tiros_boss'].add(novo_tiro)
+            self.tiros += 1
 
-            # Tocando barulho de tiro
-            # self.assets[TIRO_SOM].play()
+        # Tocando barulho de tiro
+        # self.assets[TIRO_SOM].play()
