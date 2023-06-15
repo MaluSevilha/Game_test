@@ -7,7 +7,7 @@ from config import FECHAR, PULANDO, SALA_MOBS, SALA_BOSS, NA_PLATAFORMA, MORTO
 from config import ALTURA, VEL_CORRER, MAPA_MOBS, FPS, PRETO
 
 # Importando classes
-from sprites import Jogador, Tile
+from sprites import Jogador, Tile, Inimigo
 
 # Importando chaves de assets
 from assets import load_assets, ACIDO, ACIDO_FUNDO, CENARIO_BASE, ND, MORTE_SOM
@@ -30,7 +30,9 @@ def tela_mobs(tela):
     all_tiles = pygame.sprite.Group()
     all_acido = pygame.sprite.Group()
     all_blocos = pygame.sprite.Group()
+    all_inimigos = pygame.sprite.Group()
     all_tiros = pygame.sprite.Group()
+    all_tiros_inimigos = pygame.sprite.Group()
 
     # Adicionando ao dicionário groups
     groups = {}
@@ -39,10 +41,25 @@ def tela_mobs(tela):
     groups['all_acido'] = all_acido
     groups['all_blocos'] = all_blocos
     groups['all_tiros'] = all_tiros
+    groups['all_inimigos'] = all_inimigos
+    groups['all_tiros_inimigo'] = all_tiros_inimigos
 
     # Criando o jogador
     player = Jogador(groups, assets, 20, ALTURA - 50)
     all_sprites.add(player)
+
+    # Criando inimigos
+    # ---- posicionando os inimigos
+    posicoes = [(305, 531), (599, 380), (494, 151), (846, 227), (815, 606)]
+
+    # Colocando cada inimigo em uma posição
+    for posicao in posicoes:
+        x = posicao[0]
+        y = posicao[1]
+
+        inimigo = Inimigo(groups, assets, x, y)
+        all_sprites.add(inimigo)
+        all_inimigos.add(inimigo)
 
     # Criando tiles
     for linha in range (len(MAPA_MOBS)):
@@ -211,6 +228,8 @@ def tela_mobs(tela):
         # ----- Atualiza estado do jogo
         player.update(state)
         all_tiros.update()
+        all_tiros_inimigos.update()
+        all_inimigos.update()
 
         # ----- Gera saídas
         tela.fill(PRETO)

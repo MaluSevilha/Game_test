@@ -232,15 +232,16 @@ class Inimigo(pygame.sprite.Sprite):
         # Cria variáveis do jogador e grupos
         # ----- Atirar
         self.ultimo_tiro = pygame.time.get_ticks()
-        self.tempo_tiro = 150
+        self.tempo_tiro = 200
 
         # ----- Imagens
         self.ultimo_frame = pygame.time.get_ticks()
-        self.tempo_frame = 75
+        self.tempo_frame = 100
 
         # ----- Velocidade
         self.speedy = 0
         self.speedx = 2
+        self.velocidade = self.speedx
 
         # ----- Vida
         self.vida = 3
@@ -254,12 +255,12 @@ class Inimigo(pygame.sprite.Sprite):
         agora = pygame.time.get_ticks()
 
         # Verifica quantos ticks se passaram desde o último tiro.
-        tempo_passado = agora - self.ultimo_frame
+        tempo_passado = (agora - self.ultimo_frame)
 
         # Se já pode atirar novamente...
         if tempo_passado > self.tempo_frame:
             # Marca o tick da nova imagem
-            self.ultimo_tiro = agora
+            self.ultimo_frame = agora
 
             # Atualizando frame
             if self.frame == len(self.sprites) - 1:
@@ -272,13 +273,13 @@ class Inimigo(pygame.sprite.Sprite):
             self.mask = pygame.mask.from_surface(self.image)
         
         # Atualizando posicao
-        if self.rect.x - self.x_inicial == 5:
-            velocidade = - self.speedx
+        if self.rect.x - self.x_inicial >= 15:
+            self.velocidade = - self.speedx
         
-        elif self.rect.x - self.x_inicial == -5:
-            velocidade = self.speedx
+        elif self.rect.x - self.x_inicial <= -15:
+            self.velocidade = self.speedx
 
-        self.rect.x += velocidade
+        self.rect.x += self.velocidade
 
         # Atualizando tiros
         # Verifica quantos ticks se passaram desde o último tiro.
@@ -290,9 +291,9 @@ class Inimigo(pygame.sprite.Sprite):
             self.ultimo_tiro = agora
 
             # A nova bala vai ser criada
-            novo_tiro = Bala_Inimigo(self.assets, self.rect.centery, self.rect.centerx, self)
+            novo_tiro = Bala_Inimigo(self.assets, self.rect.centery, self.rect.centerx)
             self.groups['all_sprites'].add(novo_tiro)
-            self.groups['all_tiros'].add(novo_tiro)
+            self.groups['all_tiros_inimigo'].add(novo_tiro)
 
             # Tocando barulho de tiro
             # self.assets[TIRO_SOM].play()

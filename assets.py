@@ -136,7 +136,7 @@ def load_assets():
 
     # ---- Inimigo
     assets[TIRO_INIMIGO_IMG] = pygame.image.load(path.join(INIMIGO_DIR, 'tiro_inimigo.png')).convert_alpha()
-    assets[TIRO_INIMIGO_IMG] = pygame.transform.scale(assets[TIRO_INIMIGO_IMG], (30, 15))
+    assets[TIRO_INIMIGO_IMG] = pygame.transform.scale(assets[TIRO_INIMIGO_IMG], (60, 30))
 
     assets[INIMIGO_IMG] = []
     for i in range(5):
