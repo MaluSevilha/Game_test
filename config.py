@@ -11,14 +11,16 @@ INIMIGO_DIR = path.join(path.dirname(__file__), 'assets', 'imagens', 'inimigos')
 ADICIONAIS_DIR = path.join(path.dirname(__file__), 'assets', 'imagens')
 
 # Dados gerais do jogo.
-LARGURA = 900            # Largura da tela
-ALTURA = 750             # Altura da tela
-LARGURA_JOGADOR = 37.5   # Largura do jogador
-ALTURA_JOGADOR = 45      # Altura do jogador
-LARGURA_INIMIGO = 37.5   # Largura do inimigo
-ALTURA_INIMIGO = 45      # Altura inimigo   
-TILE = 38                # Tamanho de um tile [37,5 x 37,5]
-FPS = 60                 # Frames por segundo
+TILE = 38                   # Tamanho de um tile [37,5 x 37,5]
+FPS = 60                    # Frames por segundo
+LARGURA = 900               # Largura da tela
+ALTURA = 750                # Altura da tela
+LARGURA_JOGADOR = 37.5      # Largura do jogador
+ALTURA_JOGADOR = 45         # Altura do jogador
+LARGURA_INIMIGO = 37.5      # Largura do inimigo
+ALTURA_INIMIGO = 45         # Altura inimigo   
+LARGURA_BOSS = 8*TILE       # Largura do bos
+ALTURA_BOSS = ALTURA - 20   # Altura do boss
 
 # Velocidades para o jogo
 VEL_CORRER = 5
@@ -65,24 +67,24 @@ MAPA_MOBS = [
 MAPA_BOSS = [
     [ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
     [ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
+    [ESQ, BASE, BASE, BASE, QUINA_DIR, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
     [ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
     [ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
     [ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
+    [ND, ND, ND, ND, QUINA_ESQ, BASE, BASE, QUINA_DIR, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
+    [ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
+    [ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, QUINA_ESQ, BASE, BASE, QUINA_DIR, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
+    [ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
+    [ESQ, BASE, BASE, QUINA_DIR, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
     [ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
     [ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
     [ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
+    [ND, ND, ND, ND, QUINA_ESQ, BASE, BASE, QUINA_DIR, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
     [ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
     [ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
     [ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
-    [ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
-    [ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
-    [ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
-    [ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
-    [ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
-    [ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
-    [ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
-    [ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND],
-    [ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND, ND]
+    [BASE, BASE, BASE, BASE, BASE, QUINA_DIR, ACIDO, ACIDO, ACIDO, ACIDO, ACIDO, ACIDO, ACIDO, ACIDO, ACIDO, ACIDO, ACIDO, ACIDO, ACIDO, ACIDO, ACIDO, ACIDO, ACIDO, ACIDO],
+    [BASE_FUNDA, BASE_FUNDA, BASE_FUNDA, BASE_FUNDA, BASE_FUNDA, LADO_DIR, ACIDO_FUNDO, ACIDO_FUNDO, ACIDO_FUNDO, ACIDO_FUNDO, ACIDO_FUNDO, ACIDO_FUNDO, ACIDO_FUNDO, ACIDO_FUNDO, ACIDO_FUNDO, ACIDO_FUNDO, ACIDO_FUNDO, ACIDO_FUNDO, ACIDO_FUNDO, ACIDO_FUNDO, ACIDO_FUNDO, ACIDO_FUNDO, ACIDO_FUNDO, ACIDO_FUNDO]
 ]
 
 # Cores básicas

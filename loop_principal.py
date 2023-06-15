@@ -7,6 +7,7 @@ from tela_inicial import tela_inicial
 from tela_vitoria import tela_vitoria
 from tela_instrucao import tela_instrucao
 from tela_mobs import tela_mobs
+from tela_boss import tela_boss
 from game_over import game_over
 
 # Iniciando o pygame
@@ -35,7 +36,7 @@ while state != FECHAR:
     
     # Abre a sala do boss
     elif state == SALA_BOSS:
-        state = FECHAR
+        state = tela_boss(tela)
     
     # Abre a tela de vitória
     elif state == GANHOU:
