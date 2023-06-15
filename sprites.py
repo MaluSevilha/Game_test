@@ -3,6 +3,7 @@ import random
 
 from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, PULO_SOM, TIRO_SOM, INIMIGO_IMG, TIRO_INIMIGO_IMG
 from assets import JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG, PLATAFORMA_BASE, BALA_IMG, BOSS_IMG
+from assets import TIRO_BOSS_SOM
 from config import INSTRUCAO, ALTURA, LARGURA, VEL_PULO, NO_CHAO, PULANDO, GRAVIDADE, TILE, ALTURA_BOSS
 
 class Bala(pygame.sprite.Sprite):
@@ -389,6 +390,7 @@ class Boss(pygame.sprite.Sprite):
             novo_tiro = Bala_Boss(self.assets, random.choice(lista_centros_y), self.rect.centerx, vel_bala, self)
             self.groups['all_sprites'].add(novo_tiro)
             self.groups['all_tiros_boss'].add(novo_tiro)
+            self.assets[TIRO_BOSS_SOM].play()
             self.tiros += 1
 
         # Tocando barulho de tiro

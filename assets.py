@@ -53,6 +53,7 @@ TIRO_SOM = 'tiro som'
 MORTE_SOM = 'morte som'
 DANO_INIMIGO_SOM = 'dano_inimigo'
 MORTE_INIMIGO_SOM = 'morte inimigo som'
+TIRO_BOSS_SOM = 'tiro boss'
 
 # ---- Jogador
 JOGADOR_DIREITA_IMG = 'jogador direita'
@@ -179,6 +180,9 @@ def load_assets():
 
     assets[DANO_INIMIGO_SOM] = pygame.mixer.Sound(path.join(SND_DIR, 'dano_inimigo.mp3'))
     assets[DANO_INIMIGO_SOM].set_volume(0.35)
+
+    assets[TIRO_BOSS_SOM] = pygame.mixer.Sound(path.join(SND_DIR, 'tiro_boss.mp3'))
+    assets[TIRO_BOSS_SOM].set_volume(0.35)
 
     assets[MORTE_INIMIGO_SOM] = pygame.mixer.Sound(path.join(SND_DIR, 'morte_inimigo.mp3'))
     assets[MORTE_INIMIGO_SOM].set_volume(0.5)

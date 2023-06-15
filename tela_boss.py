@@ -14,7 +14,7 @@ from config import ALTURA, VEL_CORRER, MAPA_BOSS, FPS, VERMELHO, PRETO
 from sprites import Jogador, Tile, Boss
 
 # Importando chaves de assets
-from assets import load_assets, ACIDO, ACIDO_FUNDO, ND, FONTE, CENARIO_BASE, MORTE_SOM
+from assets import load_assets, ACIDO, ACIDO_FUNDO, ND, FONTE, CENARIO_BASE, MORTE_SOM, DANO_INIMIGO_SOM
 
 # Importando imagens dos jogadores
 from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG
@@ -246,6 +246,9 @@ def tela_boss(tela):
             # Perdendo uma vida
             boss.vida -= 1
 
+            # Toca efeito sonoro 
+            assets[DANO_INIMIGO_SOM].play()
+            
             # Recriando o jogador
             if boss.vida <= 0:
                 boss.kill()
