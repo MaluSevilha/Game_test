@@ -232,7 +232,7 @@ class Inimigo(pygame.sprite.Sprite):
         # Cria variáveis do jogador e grupos
         # ----- Atirar
         self.ultimo_tiro = pygame.time.get_ticks()
-        self.tempo_tiro = 450
+        self.tempo_tiro = 550
 
         # ----- Imagens
         self.ultimo_frame = pygame.time.get_ticks()

@@ -249,7 +249,7 @@ def tela_mobs(tela):
             colisao_inimigos = []
         
         # Se o jogador está sem vidas
-        if vidas < 0:
+        if vidas <= 0:
             state = MORTO
         # Se o jogador possui vidas
         else:
