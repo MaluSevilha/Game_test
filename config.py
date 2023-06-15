@@ -8,7 +8,7 @@ FONTE_DIR = path.join(path.dirname(__file__), 'assets', 'fonte')
 TILES_DIR = path.join(path.dirname(__file__), 'assets', 'imagens', 'tiles')
 JOGADOR_DIR = path.join(path.dirname(__file__), 'assets', 'imagens', 'jogador')
 INIMIGO_DIR = path.join(path.dirname(__file__), 'assets', 'imagens', 'inimigos') 
-PLATAFORMA_DIR = path.join(path.dirname(__file__), 'assets', 'imagens')
+ADICIONAIS_DIR = path.join(path.dirname(__file__), 'assets', 'imagens')
 
 # Dados gerais do jogo.
 LARGURA = 900            # Largura da tela

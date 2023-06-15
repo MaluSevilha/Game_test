@@ -5,14 +5,14 @@ import random
 from config import FECHAR, PULANDO, SALA_MOBS, SALA_BOSS, NA_PLATAFORMA, MORTO
 
 # Importando variáveis relevantes
-from config import ALTURA, VEL_CORRER, MAPA_MOBS, FPS, PRETO, VERMELHO
+from config import ALTURA, VEL_CORRER, MAPA_MOBS, FPS, PRETO, VERMELHO, LARGURA
 
 # Importando classes
 from sprites import Jogador, Tile, Inimigo
 
 # Importando chaves de assets
 from assets import load_assets, ACIDO, ACIDO_FUNDO, CENARIO_BASE, ND, MORTE_SOM, FONTE, DANO_INIMIGO_SOM
-from assets import MORTE_INIMIGO_SOM
+from assets import MORTE_INIMIGO_SOM, SETA
 
 # Importando imagens dos jogadores
 from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG
@@ -294,8 +294,9 @@ def tela_mobs(tela):
             if player.rect.right <= esquerda_bloco or player.rect.left >= direita_bloco:
                 player.state = PULANDO
 
-        # Se o jogador aravessou a sala
-        if player.rect.right >= 875 and score >= 5:
+        # Se o jogador atravessou a sala
+        if score >= 5 and player.rect.right >= 875:
+            # Passar de sala
             state = SALA_BOSS
     
         # ----- Atualiza estado do jogo
@@ -309,8 +310,8 @@ def tela_mobs(tela):
         tela.blit(assets[CENARIO_BASE], (0, 0))
 
         # Desenhando os tiles, os personagens e o fundo
+        # ----- Tiles
         all_tiles.draw(tela)
-        all_sprites.draw(tela)
 
         # ----- Coloca as vidas na tela 
         text_surface = assets[FONTE].render(chr(9829) * vidas, True, VERMELHO)
@@ -318,6 +319,15 @@ def tela_mobs(tela):
         text_rect.bottomleft = (10, ALTURA - 10)
         tela.blit(text_surface, text_rect)
 
+        # ----- Coloca seta
+        if score >= 5:
+            # Colocando a seta de passagem
+            tela.blit(assets[SETA], (LARGURA - 120, ALTURA - 200))
+
+        # ----- Coloca personagens
+        all_sprites.draw(tela)
+
+        # Inverte o display
         pygame.display.update()
 
     return state

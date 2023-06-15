@@ -100,7 +100,7 @@ def load_assets():
     assets[PLATAFORMA_BASE] = pygame.transform.scale(assets[PLATAFORMA_BASE], (5*TILE, TILE))
 
     assets[SETA] = pygame.image.load(path.join(ADICIONAIS_DIR, 'seta.png')).convert_alpha()
-    assets[SETA] = pygame.transform.scale(assets[SETA], (5*TILE, TILE))
+    assets[SETA] = pygame.transform.scale(assets[SETA], (100, 50))
 
     # ---- Tiles
     assets[BASE] = pygame.image.load(path.join(TILES_DIR, 'chao_basico.png')).convert_alpha()
