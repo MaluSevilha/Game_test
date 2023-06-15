@@ -48,6 +48,7 @@ JUMPSCARE_SOM = 'jumpscare snd'
 PULO_SOM = 'pulo som'
 TIRO_SOM = 'tiro som'
 MORTE_SOM = 'morte som'
+DANO_INIMIGO_SOM = 'dano_inimigo'
 
 # ---- Jogador
 JOGADOR_DIREITA_IMG = 'jogador direita'
@@ -164,7 +165,10 @@ def load_assets():
     assets[PULO_SOM].set_volume(0.2)
 
     assets[TIRO_SOM] = pygame.mixer.Sound(path.join(SND_DIR, 'tiro.mp3'))
-    assets[TIRO_SOM].set_volume(0.35)
+    assets[TIRO_SOM].set_volume(0.2)
+
+    assets[DANO_INIMIGO_SOM] = pygame.mixer.Sound(path.join(SND_DIR, 'dano_inimigo.mp3'))
+    assets[DANO_INIMIGO_SOM].set_volume(0.35)
 
     # Carregando nos soundtracks dentro do dicionário
     assets[INICIO_SOM] = path.join(SND_DIR, 'soundtrack_init.mp3')

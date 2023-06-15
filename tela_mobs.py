@@ -11,7 +11,7 @@ from config import ALTURA, VEL_CORRER, MAPA_MOBS, FPS, PRETO, VERMELHO
 from sprites import Jogador, Tile, Inimigo
 
 # Importando chaves de assets
-from assets import load_assets, ACIDO, ACIDO_FUNDO, CENARIO_BASE, ND, MORTE_SOM, FONTE
+from assets import load_assets, ACIDO, ACIDO_FUNDO, CENARIO_BASE, ND, MORTE_SOM, FONTE, DANO_INIMIGO_SOM
 
 # Importando imagens dos jogadores
 from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG
@@ -259,6 +259,9 @@ def tela_mobs(tela):
             if inimigo.vida <= 0:
                 inimigo.kill()
                 score += 1
+            
+            else:
+                assets[DANO_INIMIGO_SOM].play()
             
             # Impedindo que tire mais de uma vez 
             colisao_tiros = []
