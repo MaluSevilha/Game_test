@@ -41,6 +41,7 @@ BALA_IMG = 'imagem bala'
 INICIO_SOM = 'soundtrack inicial'
 VITORIA_SOM = 'soundtrack_vitoria'
 GAMEOVER_SOM = 'soundtrack gameover'
+JOGO_SOM = 'soundtrack do jogo'
 
 # ---- Efeitos sonoros
 DESLIGANDO_LUZ = 'desligando luz'
@@ -175,6 +176,7 @@ def load_assets():
     assets[MORTE_INIMIGO_SOM].set_volume(0.5)
 
     # Carregando nos soundtracks dentro do dicionário
+    assets[JOGO_SOM] = path.join(SND_DIR, 'soundtrack_principal.mp3')
     assets[INICIO_SOM] = path.join(SND_DIR, 'soundtrack_init.mp3')
     assets[VITORIA_SOM] = path.join(SND_DIR, 'soundtrack_vitoria.mp3')
     assets[GAMEOVER_SOM] = path.join(SND_DIR, 'soundtrack_gameover.mp3')
@@ -182,7 +184,7 @@ def load_assets():
     # Retorna o dicionários com as assets
     return assets
 
-def toca_musica(file, volume = 0.5, loop = -1):
+def toca_musica(file, volume = 0.3, loop = -1):
     pygame.mixer.music.load(file)
     pygame.mixer.music.set_volume(volume)
     pygame.mixer.music.play(loop)

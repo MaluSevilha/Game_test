@@ -15,15 +15,14 @@ Projeto para o Insper Coding
 - Soundtrack do Início: https://www.fesliyanstudios.com/royalty-free-music/download/dark-fog/265 
 - Soundtrack vitória: https://www.fesliyanstudios.com/royalty-free-music/downloads-c/peaceful-and-relaxing-music/22 
 - Soundtrack GameOver: https://www.fesliyanstudios.com/royalty-free-music/download/scarey-atmospheres-ch-1/162 
-- Soundtrack Jogo:
+- Soundtrack Jogo: https://www.chosic.com/download-audio/27249/ 
 
 #### Efeitos Sonoros:
 - Desligando a luz: https://www.fesliyanstudios.com/royalty-free-sound-effects-download/light-switch-24 
 - Jumpscare: https://www.fesliyanstudios.com/royalty-free-music/download/jump-scare-l/2393 
 - Tiro: https://pixabay.com/sound-effects/shoot02wav-14562/ 
 - Pulo: https://pixabay.com/sound-effects/cartoon-jump-6462/ 
-- Morte: https://quicksounds.com/sound/102/mario-death          
-[créditos para Super Mario Bros]
+- Morte: https://quicksounds.com/sound/102/mario-death - [créditos para Super Mario Bros]
 - Hit do inimigo: https://pixabay.com/sound-effects/hurt-c-08-102842/
 - Morte do inimigo: https://pixabay.com/sound-effects/message-incoming-132126/ 
 

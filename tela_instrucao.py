@@ -11,17 +11,17 @@ from assets import load_assets, toca_musica, CENARIO_INSTRUCAO, COMANDOS, FONTE
 from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG
 
 # Importando chaves das assets
-from assets import CENARIO_INIT, INICIO_SOM, DESLIGANDO_LUZ
+from assets import JOGO_SOM
 
 def tela_instrucao(tela):
+    # Carregando o dicionário assets
+    assets = load_assets()
+    
     # Toca a musica principal
-    # toca_musica('assets/sons/under_the_sea.mp3')
+    toca_musica(assets[JOGO_SOM])
 
     # Variável para o ajuste de velocidade
     clock = pygame.time.Clock()
-    
-    # Carregando o dicionário assets
-    assets = load_assets()
 
     # Criando grupos
     all_sprites = pygame.sprite.Group()
