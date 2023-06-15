@@ -32,5 +32,8 @@ Projeto para o Insper Coding
 - https://github.com/Rkzzin/Fox-Wox-Pygame 
 - https://opengameart.org/content/a-platformer-in-the-forest 
 
+#### Fonte do texto
+- Retirada do pygame base dado pela equipe de DesSoft do Insper
+
 # Agradecimentos
 Agradeço à equipe de DesSoft, sobretudo ao professor Fillipe Resina, do primeiro semestre do Insper pela ajuda com a biblioteca pygame. Também agradeço pela ajuda do Henrique Santos para a construção do mapa com tile map. 

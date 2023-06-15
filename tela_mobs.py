@@ -5,13 +5,13 @@ import random
 from config import FECHAR, PULANDO, SALA_MOBS, SALA_BOSS, NA_PLATAFORMA, MORTO
 
 # Importando variáveis relevantes
-from config import ALTURA, VEL_CORRER, MAPA_MOBS, FPS, PRETO
+from config import ALTURA, VEL_CORRER, MAPA_MOBS, FPS, PRETO, VERMELHO
 
 # Importando classes
 from sprites import Jogador, Tile, Inimigo
 
 # Importando chaves de assets
-from assets import load_assets, ACIDO, ACIDO_FUNDO, CENARIO_BASE, ND, MORTE_SOM
+from assets import load_assets, ACIDO, ACIDO_FUNDO, CENARIO_BASE, ND, MORTE_SOM, FONTE
 
 # Importando imagens dos jogadores
 from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG
@@ -300,6 +300,12 @@ def tela_mobs(tela):
         # Desenhando os tiles, os personagens e o fundo
         all_tiles.draw(tela)
         all_sprites.draw(tela)
+
+        # ----- Coloca as vidas na tela 
+        text_surface = assets[FONTE].render(chr(9829) * vidas, True, VERMELHO)
+        text_rect = text_surface.get_rect()
+        text_rect.bottomleft = (10, ALTURA - 10)
+        tela.blit(text_surface, text_rect)
 
         pygame.display.update()
 

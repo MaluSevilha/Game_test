@@ -4,6 +4,7 @@ from os import path
 # Estabelece o caminho que contem as figuras, sons e fontes
 CENARIOS_DIR = path.join(path.dirname(__file__), 'assets', 'imagens', 'cenarios')
 SND_DIR = path.join(path.dirname(__file__), 'assets', 'sons')
+FONTE_DIR = path.join(path.dirname(__file__), 'assets', 'fonte')
 TILES_DIR = path.join(path.dirname(__file__), 'assets', 'imagens', 'tiles')
 JOGADOR_DIR = path.join(path.dirname(__file__), 'assets', 'imagens', 'jogador')
 INIMIGO_DIR = path.join(path.dirname(__file__), 'assets', 'imagens', 'inimigos') 

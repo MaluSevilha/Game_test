@@ -3,8 +3,9 @@ import pygame
 
 # Importando arquivos
 from config import FECHAR, INSTRUCAO, SALA_MOBS, FPS, VEL_CORRER, PRETO, PULANDO, GRAVIDADE, NA_PLATAFORMA, ALTURA
+from config import VERMELHO
 from sprites import Jogador, Plataforma
-from assets import load_assets, toca_musica, CENARIO_INSTRUCAO, COMANDOS
+from assets import load_assets, toca_musica, CENARIO_INSTRUCAO, COMANDOS, FONTE
 
 # Importando imagens do jogador
 from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG
@@ -44,6 +45,7 @@ def tela_instrucao(tela):
 
     # Variáveis necessárias para o jogo
     keys_down = {}
+    vidas = 3
     state = INSTRUCAO
 
     # ===== Loop Principal =====
@@ -146,6 +148,12 @@ def tela_instrucao(tela):
         tela.fill(PRETO)                                # Preenche com a cor preta
         tela.blit(assets[CENARIO_INSTRUCAO], (0, 0))
         tela.blit(assets[COMANDOS], (0,0))
+        
+        # ----- Coloca as vidas na tela 
+        text_surface = assets[FONTE].render(chr(9829) * vidas, True, VERMELHO)
+        text_rect = text_surface.get_rect()
+        text_rect.bottomleft = (10, ALTURA - 10)
+        tela.blit(text_surface, text_rect)
 
         # Desenhando sprites
         all_sprites.draw(tela)

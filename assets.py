@@ -6,7 +6,7 @@ from os import path
 from config import LARGURA, ALTURA, LARGURA_JOGADOR, ALTURA_JOGADOR, TILE, ALTURA_INIMIGO, LARGURA_INIMIGO
 
 # Importando caminhos
-from config import CENARIOS_DIR, SND_DIR, JOGADOR_DIR, TILES_DIR, PLATAFORMA_DIR, INIMIGO_DIR
+from config import CENARIOS_DIR, SND_DIR, JOGADOR_DIR, TILES_DIR, PLATAFORMA_DIR, INIMIGO_DIR, FONTE_DIR
 
 # Definindo chaves do dicionário assets
 # ---- Cenários
@@ -59,6 +59,9 @@ JOGADOR_PULA_ESQUERDA_IMG = 'jogador pular esquerda'
 # ---- Inimigo
 INIMIGO_IMG = 'inimigo img'
 TIRO_INIMIGO_IMG = 'tiro inimigo'
+
+# ---- Fonte
+FONTE = 'fonte'
 
 # Função que cria o dicionário assets
 def load_assets():
@@ -147,6 +150,10 @@ def load_assets():
         imagem = pygame.image.load(path.join(INIMIGO_DIR, arquivo)).convert_alpha()
         imagem = pygame.transform.scale(imagem, (LARGURA_INIMIGO, ALTURA_INIMIGO))
         assets[INIMIGO_IMG].append(imagem)
+
+    # ---- Fonte
+    # Juntando a fonte do score à ele
+    assets[FONTE] = pygame.font.Font(path.join(FONTE_DIR, 'PressStart2P.ttf'), 28)
 
     # Carregando efeitos sonoros dentro do dicionário
     assets[DESLIGANDO_LUZ] = pygame.mixer.Sound(path.join(SND_DIR, 'desligando_luz.mp3'))
