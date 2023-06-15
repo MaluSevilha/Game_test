@@ -1,7 +1,9 @@
 import pygame
+import random
+
 from assets import JOGADOR_DIREITA_IMG, JOGADOR_ESQUERDA_IMG, PULO_SOM, TIRO_SOM, INIMIGO_IMG, TIRO_INIMIGO_IMG
-from assets import JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG, PLATAFORMA_BASE, BALA_IMG
-from config import INSTRUCAO, ALTURA, LARGURA, VEL_PULO, NO_CHAO, PULANDO, GRAVIDADE, ALTURA_JOGADOR, TILE
+from assets import JOGADOR_PULA_DIREITA_IMG, JOGADOR_PULA_ESQUERDA_IMG, PLATAFORMA_BASE, BALA_IMG, BOSS_IMG
+from config import INSTRUCAO, ALTURA, LARGURA, VEL_PULO, NO_CHAO, PULANDO, GRAVIDADE, TILE
 
 class Bala(pygame.sprite.Sprite):
     # Construtor da classe
@@ -295,6 +297,96 @@ class Inimigo(pygame.sprite.Sprite):
             novo_tiro = Bala_Inimigo(self.assets, self.rect.centery, self.rect.centerx, self.vel_bala)
             self.groups['all_sprites'].add(novo_tiro)
             self.groups['all_tiros_inimigo'].add(novo_tiro)
+
+class Bala_Boss(pygame.sprite.Sprite):
+    # Construtor da classe
+    def __init__(self, assets, centery, centerx, velocidade):
+        # Construtor da classe mãe (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        # Imagem da bala
+        self.image = pygame.transform.scale(assets[TIRO_INIMIGO_IMG], (120, 60))
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+        
+        # Coloca no lugar inicial definido em x, y do constutor
+        self.rect.centerx = centerx
+        self.rect.bottom = centery
+        
+        # Determinando a velocidade do tiro
+        self.speedx = - velocidade
+
+    def update(self):
+        # A bala só se move no eixo y
+        self.rect.x += self.speedx
+
+        # Se o tiro passar do inicio da tela, morre.
+        if self.rect.left < 0 or self.rect.right > LARGURA:
+            self.kill()
+
+class Boss(pygame.sprite.Sprite):
+    def __init__(self, groups, assets):
+        # Construtor da classe mãe (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+
+        # Definindo imagem
+        self.image = assets[BOSS_IMG]
+        self.mask = pygame.mask.from_surface(self.image)
+
+        # Cria o retângulo de referência
+        self.rect = self.image.get_rect()
+
+        # Posiciona o inimigo
+        self.y_inicial = ALTURA / 2
+        self.rect.centerx = ALTURA / 2
+        self.rect.bottom = 350
+
+        # Cria variáveis do inimigo e grupos
+        # ----- Atirar
+        self.ultimo_tiro = pygame.time.get_ticks()
+        self.tempo_tiro = 800
+
+        # ----- Velocidade
+        self.speedy = 4
+        self.speedx = 0
+
+        # ----- Vida
+        self.vida = 10
+
+        # ----- Grupos
+        self.groups = groups
+        self.assets = assets
+    
+    def update(self):
+        # Verifica se podetrocar imagem
+        agora = pygame.time.get_ticks()
+        
+        # Atualizando posicao
+        if self.rect.y - self.y_inicial >= 50:
+            self.velocidade = - self.speedx
+        
+        elif self.rect.x - self.x_inicial <= -50:
+            self.velocidade = self.speedx
+
+        self.rect.x += self.velocidade
+
+        # Atualizando tiros
+        # Verifica quantos ticks se passaram desde o último tiro.
+        tempo_passado_tiro = agora - self.ultimo_tiro
+
+        # Se já pode atirar novamente...
+        if tempo_passado_tiro > self.tempo_tiro:
+            # Marca o tick da nova imagem.
+            self.ultimo_tiro = agora
+
+            # Definindo a velocidade das balas
+            vel_bala = random.choice([5, 8, 9, 7])
+
+            # A nova bala vai ser criada
+            while len(self.groups['all_tiros_boss']) < 4:
+                novo_tiro = Bala_Boss(self.assets, self.rect.centery, self.rect.centerx, vel_bala)
+                self.groups['all_sprites'].add(novo_tiro)
+                self.groups['all_tiros_boss'].add(novo_tiro)
 
             # Tocando barulho de tiro
             # self.assets[TIRO_SOM].play()
