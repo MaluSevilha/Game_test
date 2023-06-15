@@ -25,7 +25,7 @@ Projeto para o Insper Coding
 - Morte: https://quicksounds.com/sound/102/mario-death          
 [créditos para Super Mario Bros]
 - Hit do inimigo: https://pixabay.com/sound-effects/hurt-c-08-102842/
-- Morte do inimigo: 
+- Morte do inimigo: https://pixabay.com/sound-effects/message-incoming-132126/ 
 
 #### Tile Map:
 - https://github.com/Rkzzin/Fox-Wox-Pygame 
